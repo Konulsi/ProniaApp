@@ -1,7 +1,52 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Pronia.Data;
+using Pronia.Models;
+using Pronia.Services.Interfaces;
+using Pronia.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddSession();
+
+builder.Services.AddDbContext<AppDbContext>(option =>
+{
+    option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+
+
+builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+
+
+
+builder.Services.Configure<IdentityOptions>(option =>
+{
+    option.Password.RequiredLength = 8;
+    option.Password.RequireDigit = true;
+    option.Password.RequireLowercase = true;
+    option.Password.RequireUppercase = true;
+    option.Password.RequireNonAlphanumeric = true;
+
+    option.User.RequireUniqueEmail = true;
+
+    option.Lockout.MaxFailedAccessAttempts = 3;
+    option.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+    option.Lockout.AllowedForNewUsers = true;
+
+});
+
+
+
+
+
+builder.Services.AddScoped<ISliderService, SliderService>();
+builder.Services.AddScoped<ILayoutService, LayoutService>();
+
+
+
 
 var app = builder.Build();
 
@@ -12,9 +57,16 @@ if (!app.Environment.IsDevelopment())
 }
 app.UseStaticFiles();
 
+app.UseSession();
+
 app.UseRouting();
 
+app.UseAuthentication();
+
 app.UseAuthorization();
+
+
+
 
 app.MapControllerRoute(
     name: "default",
