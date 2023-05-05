@@ -44,6 +44,8 @@ builder.Services.Configure<IdentityOptions>(option =>
 
 builder.Services.AddScoped<ISliderService, SliderService>();
 builder.Services.AddScoped<ILayoutService, LayoutService>();
+builder.Services.AddScoped<IAdvertisingService, AdvertisingService>();
+
 
 
 
