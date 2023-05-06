@@ -1,9 +1,12 @@
-﻿using Pronia.ViewModels;
+﻿using Pronia.Models;
+using Pronia.ViewModels;
 
 namespace Pronia.Services.Interfaces
 {
     public interface ILayoutService
     {
-        LayoutVM GetSettingsData();
+        Dictionary<string, string> GetSettingsData();
+
+        Task<IEnumerable<Social>> GetSocialData();
     }
 }
