@@ -44,6 +44,13 @@ builder.Services.AddScoped<ISliderService, SliderService>();
 builder.Services.AddScoped<ILayoutService, LayoutService>();
 builder.Services.AddScoped<ISocialService, SocialService>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IClientService, ClientService>();
+builder.Services.AddScoped<IBrandService, BrandService>();
+builder.Services.AddScoped<IBlogService, BlogService>();
+
+
+
+
 builder.Services.AddScoped<IAdvertisingService, AdvertisingService>();
 
 

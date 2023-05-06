@@ -13,15 +13,27 @@ namespace Pronia.Controllers
         private readonly ISliderService _sliderService;
         private readonly IAdvertisingService _advertisingService;
         private readonly IProductService _productService;
+        private readonly IClientService _clientService;
+        private readonly IBrandService _brandService;
+        private readonly IBlogService _blogService;
+
+
+
         public HomeController(ISliderService sliderService, 
                               IAdvertisingService advertisingService, 
                               AppDbContext context,
-                              IProductService productService)
+                              IProductService productService,
+                              IClientService clientService,
+                              IBrandService brandService,
+                              IBlogService blogService)
         {
             _sliderService = sliderService;
             _advertisingService = advertisingService;
             _context= context;
             _productService= productService;
+            _clientService = clientService;
+            _brandService= brandService;
+            _blogService= blogService;
 
         }
 
@@ -34,7 +46,13 @@ namespace Pronia.Controllers
             List<Product> bestsellerProduct = await _productService.GetBestsellerProducts();
             List<Product> latestProduct = await _productService.GetLatestProducts();
             List<Product> newProduct = await _productService.GetNewProducts();
-            List<Banner> baenners = await _context.Banners.ToListAsync();
+            List<Banner> banners = await _context.Banners.ToListAsync();
+            List<Client> clients = await _clientService.GetClients();
+            List<Brand> brands = await _brandService.GetBrands();
+            List<Blog> blogs = await _blogService.GetBlogs();
+
+
+
 
 
 
@@ -49,8 +67,11 @@ namespace Pronia.Controllers
                 FeaturedProduct= featuredProduct,
                 BestSellerProduct = bestsellerProduct,
                 LatestProduct = latestProduct,
-                Banners= baenners,
+                Banners= banners,
                 NewProducts= newProduct,
+                Clients= clients,
+                Brands= brands,
+                Blogs= blogs,
                 
             };
 

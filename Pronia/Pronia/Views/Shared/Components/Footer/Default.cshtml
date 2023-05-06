@@ -108,7 +108,7 @@
                 <div class="col-lg-3 pt-40">
                     <div class="footer-contact-info">
                         <h3 class="footer-widget-title">Got Question? Call Us</h3>
-                        <a class="number" href="tel://123-456-789">123 456 789</a>
+                        <a class="number" href="tel://123-456-789">@Model.Settings["FooterPhone"]</a>
                         <div class="address">
                             <ul>
                                 <li>Your Address Goes Here</li>
@@ -117,7 +117,7 @@
                     </div>
                     <div class="payment-method">
                         <a href="#">
-                            <img src="~/assets/images/website-images/1.png"
+                            <img src="~/assets/images/website-images/@Model.Settings["PaymentPhoto"]"
                                  alt="Payment Method" />
                         </a>
                     </div>
