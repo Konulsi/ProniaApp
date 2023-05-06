@@ -11,6 +11,8 @@ namespace Pronia.Services.Interfaces
         Task<List<Product>> GetFeaturedProducts();
         Task<List<Product>> GetBestsellerProducts();
         Task<List<Product>> GetLatestProducts();
+        Task<List<Product>> GetNewProducts();
+
 
     }
 }

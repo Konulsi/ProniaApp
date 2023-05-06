@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Pronia.Data;
 using Pronia.Models;
 using Pronia.Services.Interfaces;
@@ -32,6 +33,9 @@ namespace Pronia.Controllers
             List<Product> featuredProduct = await _productService.GetFeaturedProducts();
             List<Product> bestsellerProduct = await _productService.GetBestsellerProducts();
             List<Product> latestProduct = await _productService.GetLatestProducts();
+            List<Product> newProduct = await _productService.GetNewProducts();
+            List<Banner> baenners = await _context.Banners.ToListAsync();
+
 
 
 
@@ -44,7 +48,9 @@ namespace Pronia.Controllers
                 HeaderBackgrounds= headerBackgrounds,
                 FeaturedProduct= featuredProduct,
                 BestSellerProduct = bestsellerProduct,
-                LatestProduct = latestProduct
+                LatestProduct = latestProduct,
+                Banners= baenners,
+                NewProducts= newProduct,
                 
             };
 
