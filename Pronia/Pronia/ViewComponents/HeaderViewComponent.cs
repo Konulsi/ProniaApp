@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Pronia.Services.Interfaces;
+using Pronia.ViewModels;
 
 namespace Pronia.ViewComponents
 {
@@ -13,7 +14,11 @@ namespace Pronia.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            return await Task.FromResult(View(_layoutService.GetSettingsData()));
+            LayoutVM model = new LayoutVM()
+            {
+                Settings = _layoutService.GetSettingsData()
+            };
+            return await Task.FromResult(View(model));
         }
     }
 }

@@ -29,7 +29,11 @@ namespace Pronia.Controllers
             List<Slider> sliders = await _sliderService.GetAll();
             List<Advertising> advertisings = await _advertisingService.GetAll();
             Dictionary<string, string> headerBackgrounds = _context.HeaderBackgrounds.AsEnumerable().ToDictionary(m => m.Key, m => m.Value);
-            List<Product> products= await _productService.GetAll();
+            List<Product> featuredProduct = await _productService.GetFeaturedProducts();
+            List<Product> bestsellerProduct = await _productService.GetBestsellerProducts();
+            List<Product> latestProduct = await _productService.GetLatestProducts();
+
+
 
 
 
@@ -38,7 +42,9 @@ namespace Pronia.Controllers
                 Sliders = sliders,
                 Advertisings = advertisings,
                 HeaderBackgrounds= headerBackgrounds,
-                Products= products,
+                FeaturedProduct= featuredProduct,
+                BestSellerProduct = bestsellerProduct,
+                LatestProduct = latestProduct
                 
             };
 

@@ -25,5 +25,12 @@ namespace Pronia.Services
         public async Task<Product> GetById(int id) => await _context.Products.FindAsync(id);
         public async Task<int> GetCountAsync() => await _context.Products.CountAsync();
 
+
+        public async Task<List<Product>> GetFeaturedProducts() => await _context.Products.Where(m=>!m.SoftDelete).OrderByDescending(m=>m.Rate).ToListAsync();
+        public async Task<List<Product>> GetBestsellerProducts() => await _context.Products.Where(m => !m.SoftDelete).OrderByDescending(m => m.SaleCount).ToListAsync();
+        public async Task<List<Product>> GetLatestProducts() => await _context.Products.Where(m => !m.SoftDelete).OrderByDescending(m => m.CreateDate).ToListAsync();
+
+
+
     }
 }

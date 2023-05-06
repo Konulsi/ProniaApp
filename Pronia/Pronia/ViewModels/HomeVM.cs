@@ -7,9 +7,9 @@ namespace Pronia.ViewModels
         public List<Slider> Sliders { get; set; }
         public List<Advertising> Advertisings { get; set; }
         public Dictionary<string, string> HeaderBackgrounds { get; set; }
-        public List<Product> Products { get; set; }
-
-
+        public List<Product> BestSellerProduct { get; set; }
+        public List<Product> FeaturedProduct { get; set; }
+        public List<Product> LatestProduct { get; set; }
 
     }
 }

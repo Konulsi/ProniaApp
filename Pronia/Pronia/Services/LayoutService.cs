@@ -14,20 +14,14 @@ namespace Pronia.Services
         {
             _context = context;
         }
-        public Dictionary<string, string> GetSettingsData()
+        public Dictionary<string,string> GetSettingsData()
         {
             Dictionary<string, string> settings = _context.Settings.AsEnumerable().ToDictionary(m => m.Key, m => m.Value);
 
-            return  settings ;
+            return settings;
         }
 
-        public async Task<IEnumerable<Social>> GetSocialData()
-        {
-            IEnumerable<Social> social = await _context.Socials.Where(m => !m.SoftDelete).ToListAsync();
-
-
-            return  social;
-        }
+     
 
     }
 }

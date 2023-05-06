@@ -4,8 +4,7 @@ namespace Pronia.ViewModels
 {
     public class LayoutVM
     {
-        public IEnumerable<Social> Socials { get; set; }
-
+        public int BasketCount { get; set; }
         public Dictionary<string, string> Settings { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using Pronia.Data;
 using Pronia.Models;
 using Pronia.Services.Interfaces;
 using Pronia.Services;
+using System.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,11 +40,10 @@ builder.Services.Configure<IdentityOptions>(option =>
 });
 
 
-
-
-
 builder.Services.AddScoped<ISliderService, SliderService>();
 builder.Services.AddScoped<ILayoutService, LayoutService>();
+builder.Services.AddScoped<ISocialService, SocialService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IAdvertisingService, AdvertisingService>();
 
 
