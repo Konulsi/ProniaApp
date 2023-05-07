@@ -1,6 +1,8 @@
-﻿
+﻿@model ShopVM
 @{
     ViewData["Title"] = "Shop";
+    int sumCategoryProducts = 0;
+    int sumColorProducts = 0;
 }
 
 
@@ -8,8 +10,7 @@
       <main class="main-content">
         <div
           class="breadcrumb-area breadcrumb-height"
-          data-bg-image="assets/images/breadcrumb/bg/1-1-1919x388.jpg"
-        >
+         data-bg-image="assets/images/breadcrumb/bg/@Model.HeaderBackgrounds["PageNameBackgrounds"]">
           <div class="container h-100">
             <div class="row h-100">
               <div class="col-lg-12">
@@ -17,7 +18,7 @@
                   <h2 class="breadcrumb-heading">Shop</h2>
                   <ul>
                     <li>
-                      <a href="index.html">Home</a>
+                      <a asp-controller="Home" asp-action="Index">Home</a>
                     </li>
                     <li>Shop Default</li>
                   </ul>
@@ -47,48 +48,31 @@
                     <div class="widgets-item pt-0">
                       <h2 class="widgets-title mb-4">Categories</h2>
                       <ul class="widgets-category">
+
                         <li>
                           <a href="#">
                             <i class="fa fa-chevron-right"></i>
-                            All <span>(65)</span>
+                               @foreach (var category in Model.Categories)
+                                {
+                                   sumCategoryProducts += (int)category.ProductCategories?.Count();
+                                }
+
+                            All <span>(@sumCategoryProducts)</span>
                           </a>
                         </li>
-                        <li>
-                          <a href="#">
-                            <i class="fa fa-chevron-right"></i>
-                            Bansai <span>(12)</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="fa fa-chevron-right"></i>
-                            House Plants <span>(22)</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="fa fa-chevron-right"></i>
-                            Indoor Living <span>(19)</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="fa fa-chevron-right"></i>
-                            Perennnials <span>(17)</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="fa fa-chevron-right"></i>
-                            Plant For Gift <span>(01)</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="fa fa-chevron-right"></i>
-                            Garden Tools <span>(12)</span>
-                          </a>
-                        </li>
+
+                            @foreach (var category in Model.Categories)
+                            {
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-chevron-right"></i>
+                                       @category.Name <span>(@category.ProductCategories?.Count())</span>
+                                    </a>
+                                </li>
+                            }
+                  
+                  
+
                       </ul>
                     </div>
                     <div class="widgets-item">
@@ -97,34 +81,24 @@
                         <li>
                           <a href="#">
                             <i class="fa fa-chevron-right"></i>
-                            All <span>(65)</span>
+                            @foreach (var color in Model.Colors)
+                            {
+                                sumColorProducts += (int)color.Products?.Count();                
+                            }
+                             All <span>(@sumColorProducts)</span>
                           </a>
                         </li>
-                        <li>
-                          <a href="#">
-                            <i class="fa fa-chevron-right"></i>
-                            Gold <span>(12)</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="fa fa-chevron-right"></i>
-
-                            Green <span>(22)</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="fa fa-chevron-right"></i>
-                            white <span>(13)</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="fa fa-chevron-right"></i>
-                            Black <span>(10)</span>
-                          </a>
-                        </li>
+                        @foreach (var color in Model.Colors)
+                        {
+                           <li>
+                              <a href="#">
+                                <i class="fa fa-chevron-right"></i>
+                                @color.Name <span>(@color.Products.Count())</span>
+                              </a>
+                        </li>            
+                        }
+                     
+                     
                       </ul>
                     </div>
                     <div class="widgets-item widgets-filter">
@@ -171,7 +145,7 @@
                   <div class="banner-item widgets-banner img-hover-effect">
                     <div class="banner-img">
                       <img
-                        src="~/assets/images/website-images/1-270x300.webp"
+                        src="~/assets/images/website-images/@Model.NewProducts.FirstOrDefault().MainImage"
                         alt="Banner Image"
                       />
                     </div>
