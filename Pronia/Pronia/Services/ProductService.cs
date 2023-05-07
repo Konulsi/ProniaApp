@@ -12,7 +12,14 @@ namespace Pronia.Services
         {
             _context = context;
         }
-        public async Task<List<Product>> GetAll() => await _context.Products.Include(m => m.Images).ToListAsync();
+        public async Task<List<Product>> GetAll() => await _context.Products
+                                                                    .Include(m => m.Images)
+                                                                    .Include(m => m.ProductSizes)
+                                                                    .Include(m => m.ProductTags)
+                                                                    .Include(m => m.Color)
+                                                                    .Include(m => m.Comments)
+                                                                    .Include(m => m.ProductCategories)?
+                                                                    .ToListAsync();
         public async Task<Product> GetFullDataById(int id) => await _context.Products
                                                                             .Include(m => m.Images)
                                                                             .Include(m => m.ProductSizes)
