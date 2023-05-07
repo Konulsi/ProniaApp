@@ -697,8 +697,8 @@
       "PackagePath": "staticwebassets\\assets\\js\\plugins\\wow.min.js"
     },
     {
-      "Id": "C:\\Users\\konul\\OneDrive\\Masaüstü\\Backend-Project\\Pronia\\Pronia\\wwwroot\\assets\\js\\pronia.js",
-      "PackagePath": "staticwebassets\\assets\\js\\pronia.js"
+      "Id": "C:\\Users\\konul\\OneDrive\\Masaüstü\\Backend-Project\\Pronia\\Pronia\\wwwroot\\assets\\js\\script.js",
+      "PackagePath": "staticwebassets\\assets\\js\\script.js"
     },
     {
       "Id": "C:\\Users\\konul\\OneDrive\\Masaüstü\\Backend-Project\\Pronia\\Pronia\\wwwroot\\assets\\js\\vendor\\bootstrap.bundle.min.js",

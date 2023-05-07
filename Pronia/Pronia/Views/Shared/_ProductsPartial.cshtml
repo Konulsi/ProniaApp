@@ -3,63 +3,63 @@
 @foreach (var product in Model)
 {
     <div class="col-md-4 col-sm-6">
-    <div class="product-item" data-id="@product.ProductCategories.FirstOrDefault()?.Id">
-        <div class="product-img">
-            <a href="single-product-variable.html">
-                <img class="primary-img"
+        <div class="product-item">
+            <div class="product-img">
+                <a href="single-product-variable.html">
+                    <img class="primary-img"
                      src="~/assets/images/website-images/@product.MainImage"
                      alt="Product Images" />
-                <img class="secondary-img"
+                    <img class="secondary-img"
                      src="~/assets/images/website-images/@product.HoverImage"
                      alt="Product Images" />
-            </a>
-            <div class="product-add-action">
-                <ul>
-                    <li>
-                        <a href="wishlist.html"
+                </a>
+                <div class="product-add-action">
+                    <ul>
+                        <li>
+                            <a href="wishlist.html"
                            data-tippy="Add to wishlist"
                            data-tippy-inertia="true"
                            data-tippy-animation="shift-away"
                            data-tippy-delay="50"
                            data-tippy-arrow="true"
                            data-tippy-theme="sharpborder">
-                            <i class="pe-7s-like"></i>
-                        </a>
-                    </li>
-                    <li class="quuickview-btn"
+                                <i class="pe-7s-like"></i>
+                            </a>
+                        </li>
+                        <li class="quuickview-btn"
                         data-bs-toggle="modal"
                         data-bs-target="#quickModal">
-                        <a href="#"
+                            <a href="#"
                            data-tippy="Quickview"
                            data-tippy-inertia="true"
                            data-tippy-animation="shift-away"
                            data-tippy-delay="50"
                            data-tippy-arrow="true"
                            data-tippy-theme="sharpborder">
-                            <i class="pe-7s-look"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="cart.html"
+                                <i class="pe-7s-look"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="cart.html"
                            data-tippy="Add to cart"
                            data-tippy-inertia="true"
                            data-tippy-animation="shift-away"
                            data-tippy-delay="50"
                            data-tippy-arrow="true"
                            data-tippy-theme="sharpborder">
-                            <i class="pe-7s-cart"></i>
-                        </a>
-                    </li>
-                </ul>
+                                <i class="pe-7s-cart"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-        <div class="product-content">
-            <a class="product-name"
+            <div class="product-content">
+                <a class="product-name"
                href="single-product-variable.html">@product.Name</a>
-            <div class="price-box pb-1">
-                <span class="new-price">$@product.Price</span>
-            </div>
-            <div class="rating-box">
+                <div class="price-box pb-1">
+                    <span class="new-price">$@product.Price</span>
+                </div>
+                <div class="rating-box">
                     <ul>
                         @for (int i = 0; i < Model.FirstOrDefault().Rate; i++)
                         {
@@ -67,14 +67,12 @@
                         }
                         @for (int i = 0; i < 5 - (int)Model.FirstOrDefault().Rate; i++)
                         {
-                            <li><i class="fa fa-star" style="color: darkgray"></i></li>
-
+                            <li><i class="fa fa-star" style="color:darkgrey"></i></li>
                         }
-
                     </ul>
+                </div>
             </div>
         </div>
     </div>
-</div>
 }
 

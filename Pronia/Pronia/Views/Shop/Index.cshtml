@@ -50,7 +50,7 @@
                       <ul class="widgets-category">
 
                         <li>
-                          <a href="#" >
+                            <a href="#" class="all-products">
                             <i class="fa fa-chevron-right"></i>
                                @foreach (var category in Model.Categories)
                                 {
@@ -79,7 +79,7 @@
                       <h2 class="widgets-title mb-4">Color</h2>
                       <ul class="widgets-category widgets-color">
                         <li>
-                          <a href="#">
+                            <a href="#" class="all-color">
                             <i class="fa fa-chevron-right"></i>
                             @foreach (var color in Model.Colors)
                             {
@@ -91,7 +91,7 @@
                         @foreach (var color in Model.Colors)
                         {
                            <li>
-                              <a href="#">
+                              <a href="#" data-id="@color.Id" class="color">
                                 <i class="fa fa-chevron-right"></i>
                                 @color.Name <span>(@color.Products.Count())</span>
                               </a>
@@ -197,7 +197,7 @@
                       </ul>
                     </li>
                     <li class="short">
-                      <select class="nice-select">
+                      <select class="nice-select ">
                         <option value="1">Sort by Default</option>
                         <option value="2">Sort by Popularity</option>
                         <option value="3">Sort by Rated</option>
@@ -218,7 +218,7 @@
                   >
                     <div class="product-grid-view row g-y-20 ">
 
-                        <partial name="_ProductsPartial" model="@Model.Products" />
+                        <partial name="_ProductsPartial" model="@Model.PaginateProduct.Datas" />
 
                     </div>
                   </div>
@@ -1327,20 +1327,22 @@
                 <div class="pagination-area">
                   <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
-                      <li class="page-item active">
-                        <a class="page-link" href="#">1</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">2</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">3</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next"
-                          >&raquo;</a
-                        >
-                      </li>
+                    
+                        <li class="page-item @(Model.PaginateProduct.HasPrevious ? "" : "disabled")">
+
+                             <a class="page-link" asp-action="Index" asp-route-page="@(Model.PaginateProduct.CurrentPage - 1)" tabindex="-1" aria-label="Previous"><<</a>
+                        </li>
+                        @for (int i = 1; i <= Model.PaginateProduct.TotalPage; i++)
+                        {
+                          
+                            <li class="page-item active @(Model.PaginateProduct.CurrentPage == i ? "disabled" : "")"><a class="page-link" asp-controller="Shop" asp-action="Index" asp-route-page="@i">@i</a></li>
+
+                        }
+
+                        <li class="page-item @(Model.PaginateProduct.HasNext ? "" : "disabled")">
+                            <a class="page-link" asp-action="Index" asp-route-page="@(Model.PaginateProduct.CurrentPage + 1)" aria-label="Next">>></a>
+                        </li>
+               
                     </ul>
                   </nav>
                 </div>
@@ -1350,6 +1352,9 @@
         </div>
       </main>
       <!-- Main Content Area End Here -->
+
+
 @section Scripts{
-   <script src="~/assets/js/pronia.js"></script>
+   <script src="~/assets/js/script.js"></script>
 }
+

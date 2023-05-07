@@ -40,5 +40,21 @@ namespace Pronia.Services
         public async Task<List<Product>> GetNewProducts() => await _context.Products.Where(m => !m.SoftDelete).OrderByDescending(m => m.CreateDate).Take(4).ToListAsync();
 
 
+
+        public async Task<List<Product>> GetPaginatedDatas(int page, int take) 
+        {
+            return await _context.Products
+                                .Include(m => m.ProductSizes)
+                                .Include(m => m.ProductTags)
+                                .Include(m => m.Color)
+                                .Include(m => m.Comments)
+                                .Include(m => m.ProductCategories)?
+                                .Include(m => m.Images)
+                                .Where(m=>!m.SoftDelete)
+                                .Skip((page * take) - take)
+                                .Take(take).ToListAsync();
+       
+        }
+
     }
 }

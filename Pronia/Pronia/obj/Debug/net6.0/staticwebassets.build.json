@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "VMoO/nwcADZD6QaYNnafZmwVHyzEbgTKU8bAShel2hs=",
+  "Hash": "ZOIWXS+yprZt66Ty+iVoqRZAbEEJWOuUxq7/dx2IqqI=",
   "Source": "Pronia",
   "BasePath": "_content/Pronia",
   "Mode": "Default",
@@ -2992,12 +2992,12 @@
       "OriginalItemSpec": "wwwroot\\assets\\js\\plugins\\wow.min.js"
     },
     {
-      "Identity": "C:\\Users\\konul\\OneDrive\\Masaüstü\\Backend-Project\\Pronia\\Pronia\\wwwroot\\assets\\js\\pronia.js",
+      "Identity": "C:\\Users\\konul\\OneDrive\\Masaüstü\\Backend-Project\\Pronia\\Pronia\\wwwroot\\assets\\js\\script.js",
       "SourceId": "Pronia",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\konul\\OneDrive\\Masaüstü\\Backend-Project\\Pronia\\Pronia\\wwwroot\\",
       "BasePath": "_content/Pronia",
-      "RelativePath": "assets/js/pronia.js",
+      "RelativePath": "assets/js/script.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -3006,7 +3006,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\js\\pronia.js"
+      "OriginalItemSpec": "wwwroot\\assets\\js\\script.js"
     },
     {
       "Identity": "C:\\Users\\konul\\OneDrive\\Masaüstü\\Backend-Project\\Pronia\\Pronia\\wwwroot\\assets\\js\\vendor\\bootstrap.bundle.min.js",
