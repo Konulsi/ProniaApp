@@ -15,21 +15,23 @@ namespace Pronia.Services
         public async Task<List<Product>> GetAll() => await _context.Products
                                                                     .Include(m => m.Images)
                                                                     .Include(m => m.ProductSizes)
+                                                                    .ThenInclude(m => m.Size)
                                                                     .Include(m => m.ProductTags)
                                                                     .ThenInclude(m => m.Tag)
                                                                     .Include(m => m.Color)
                                                                     .Include(m => m.Comments)
-                                                                    .Include(m => m.ProductCategories)?
+                                                                    .Include(m => m.ProductCategories)
                                                                     .ThenInclude(m => m.Category)
                                                                     .ToListAsync();
-        public async Task<Product> GetFullDataById(int id) => await _context.Products
+        public async Task<Product> GetFullDataById(int? id) => await _context.Products
                                                                             .Include(m => m.Images)
                                                                             .Include(m => m.ProductSizes)
+                                                                            .ThenInclude(m => m.Size)
                                                                             .Include(m => m.ProductTags)
                                                                             .ThenInclude(m => m.Tag)
                                                                             .Include(m => m.Color)
                                                                             .Include(m => m.Comments)
-                                                                            .Include(m => m.ProductCategories)?
+                                                                            .Include(m => m.ProductCategories)
                                                                             .ThenInclude(m => m.Category)
                                                                             .FirstOrDefaultAsync(m => m.Id == id);
 

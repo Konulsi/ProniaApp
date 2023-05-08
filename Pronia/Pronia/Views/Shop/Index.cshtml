@@ -126,24 +126,13 @@
                     <div class="widgets-item">
                       <h2 class="widgets-title mb-4">Populer Tags</h2>
                       <ul class="widgets-tag">
-                        <li>
-                          <a href="#">Fashion</a>
-                        </li>
-                        <li>
-                          <a href="#">Organic</a>
-                        </li>
-                        <li>
-                          <a href="#">Old Fashion</a>
-                        </li>
-                        <li>
-                          <a href="#">Men</a>
-                        </li>
-                        <li>
-                          <a href="#">Fashion</a>
-                        </li>
-                        <li>
-                          <a href="#">Dress</a>
-                        </li>
+                          @foreach (var tag in Model.Tags)
+                         {
+                            <li>
+                                <a href="#" data-id="@tag.Id" class="product-tag">@tag.Name</a>
+                            </li>
+                         }
+                    
                       </ul>
                     </div>
                   </div>

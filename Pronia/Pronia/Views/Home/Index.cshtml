@@ -140,7 +140,7 @@
                                 <div class="col-xl-3 col-md-4 col-sm-6">
                                     <div class="product-item">
                                         <div class="product-img">
-                                            <a href="shop.html">
+                                            <a asp-controller="shop" asp-action="ProductDetail" asp-route-id="@featured.Id">
                                                 <img class="primary-img"
                                                  src="~/assets/images/website-images//@featured.MainImage"
                                                  alt="Product Images" />
@@ -228,7 +228,7 @@
                                 <div class="col-xl-3 col-md-4 col-sm-6">
                                     <div class="product-item">
                                         <div class="product-img">
-                                            <a href="shop.html">
+                                            <a asp-controller="shop" asp-action="ProductDetail" asp-route-id="@bestseller.Id">
                                                 <img class="primary-img"
                                                  src="~/assets/images/website-images//@bestseller.MainImage"
                                                  alt="Product Images" />
@@ -315,7 +315,7 @@
                                 <div class="col-xl-3 col-md-4 col-sm-6">
                                     <div class="product-item">
                                         <div class="product-img">
-                                            <a href="shop.html">
+                                            <a asp-controller="shop" asp-action="ProductDetail" asp-route-id="@latestProduct.Id">
                                                 <img class="primary-img"
                                                  src="~/assets/images/website-images//@latestProduct.MainImage"
                                                  alt="Product Images" />
@@ -491,7 +491,7 @@
                         {
                             <div class="swiper-slide product-item">
                                 <div class="product-img">
-                                    <a href="shop.html">
+                                    <a asp-controller="shop" asp-action="ProductDetail" asp-route-id="@newProduct.Id">
                                         <img class="primary-img"
                                          src="~/assets/images/website-images//@newProduct.MainImage"
                                          alt="Product Images" />
@@ -547,11 +547,11 @@
                                     <div class="rating-box">
                                         <ul>
 
-                                            @for (int i = 0; i < Model.FeaturedProduct.FirstOrDefault().Rate; i++)
+                                            @for (int i = 0; i < newProduct.Rate; i++)
                                             {
                                                 <li><i class="fa fa-star"></i></li>
                                             }
-                                            @for (int i = 0; i < 5 - (int)Model.FeaturedProduct.FirstOrDefault().Rate; i++)
+                                            @for (int i = 0; i < 5 - newProduct.Rate; i++)
                                             {
                                                 <li><i class="fa fa-star" style="color: darkgray"></i></li>
 

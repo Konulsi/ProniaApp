@@ -124,4 +124,28 @@
 
     })
 
+
+
+    $(document).on("click", ".product-tag", function (e) {
+        e.preventDefault();
+     
+        let tagId = $(this).attr("data-id");
+        let parent = $(".product-grid-view")
+
+        $.ajax({
+
+            url: `shop/GetProductsByTag?id=${tagId}`,
+            type: "Get",
+
+            success: function (res) {
+
+                $(parent).html(res)
+            }
+        })
+
+
+
+    })
+
+
 })

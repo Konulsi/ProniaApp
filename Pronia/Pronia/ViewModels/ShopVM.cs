@@ -9,6 +9,7 @@ namespace Pronia.ViewModels
         public List<Category> Categories { get; set; }
         public List<Product> NewProducts { get; set; }
         public List<Color> Colors { get; set; }
+        public List<Tag> Tags { get; set; }
         public Paginate<Product> PaginateProduct { get; set; }
 
     }

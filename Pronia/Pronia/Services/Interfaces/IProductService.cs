@@ -7,7 +7,7 @@ namespace Pronia.Services.Interfaces
         Task<Product> GetById(int id);
         Task<List<Product>> GetAll();
         Task<int> GetCountAsync();
-        Task<Product> GetFullDataById(int id);
+        Task<Product> GetFullDataById(int? id);
         Task<List<Product>> GetFeaturedProducts();
         Task<List<Product>> GetBestsellerProducts();
         Task<List<Product>> GetLatestProducts();
