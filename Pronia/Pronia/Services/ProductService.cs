@@ -16,24 +16,28 @@ namespace Pronia.Services
                                                                     .Include(m => m.Images)
                                                                     .Include(m => m.ProductSizes)
                                                                     .Include(m => m.ProductTags)
+                                                                    .ThenInclude(m => m.Tag)
                                                                     .Include(m => m.Color)
                                                                     .Include(m => m.Comments)
                                                                     .Include(m => m.ProductCategories)?
+                                                                    .ThenInclude(m => m.Category)
                                                                     .ToListAsync();
         public async Task<Product> GetFullDataById(int id) => await _context.Products
                                                                             .Include(m => m.Images)
                                                                             .Include(m => m.ProductSizes)
                                                                             .Include(m => m.ProductTags)
+                                                                            .ThenInclude(m => m.Tag)
                                                                             .Include(m => m.Color)
                                                                             .Include(m => m.Comments)
                                                                             .Include(m => m.ProductCategories)?
+                                                                            .ThenInclude(m => m.Category)
                                                                             .FirstOrDefaultAsync(m => m.Id == id);
 
         public async Task<Product> GetById(int id) => await _context.Products.FindAsync(id);
         public async Task<int> GetCountAsync() => await _context.Products.CountAsync();
 
 
-        public async Task<List<Product>> GetFeaturedProducts() => await _context.Products.Where(m=>!m.SoftDelete).OrderByDescending(m=>m.Rate).ToListAsync();
+        public async Task<List<Product>> GetFeaturedProducts() => await _context.Products.Where(m => !m.SoftDelete).OrderByDescending(m => m.Rate).ToListAsync();
         public async Task<List<Product>> GetBestsellerProducts() => await _context.Products.Where(m => !m.SoftDelete).OrderByDescending(m => m.SaleCount).ToListAsync();
         public async Task<List<Product>> GetLatestProducts() => await _context.Products.Where(m => !m.SoftDelete).OrderByDescending(m => m.CreateDate).ToListAsync();
 

@@ -1,8 +1,8 @@
 ﻿@model List<Product>
 
-@foreach (var item in Model)
+@foreach (var product in Model)
 {
     <li class="d-flex px-3">
-        <a asp-controller="shop" asp-action="detail" asp-route-id="@item.Id">@item.Name</a>
+        <a asp-controller="Shop" asp-action="ProductDetail" asp-route-id="@product.Id">@product.Name</a>
     </li>
 }

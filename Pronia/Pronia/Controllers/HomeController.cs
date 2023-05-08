@@ -16,6 +16,7 @@ namespace Pronia.Controllers
         private readonly IClientService _clientService;
         private readonly IBrandService _brandService;
         private readonly IBlogService _blogService;
+        
 
 
 
@@ -50,6 +51,7 @@ namespace Pronia.Controllers
             List<Client> clients = await _clientService.GetClients();
             List<Brand> brands = await _brandService.GetBrands();
             List<Blog> blogs = await _blogService.GetBlogs();
+            List<Product> products = await _productService.GetAll();
 
 
 
@@ -64,14 +66,15 @@ namespace Pronia.Controllers
                 Sliders = sliders,
                 Advertisings = advertisings,
                 HeaderBackgrounds= headerBackgrounds,
-                FeaturedProduct= featuredProduct,
+                FeaturedProduct = featuredProduct,
                 BestSellerProduct = bestsellerProduct,
                 LatestProduct = latestProduct,
-                Banners= banners,
+                Banners = banners,
                 NewProducts= newProduct,
                 Clients= clients,
                 Brands= brands,
                 Blogs= blogs,
+                Products= products,
                 
             };
 

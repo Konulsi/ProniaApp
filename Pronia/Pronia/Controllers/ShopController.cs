@@ -48,7 +48,7 @@ namespace Pronia.Controllers
                 Categories = categories,
                 NewProducts= newProducts,
                 Colors = colors,
-                PaginateProduct = paginateDatas
+                PaginateProduct = paginateDatas,
             };
 
 
@@ -90,23 +90,48 @@ namespace Pronia.Controllers
         }
 
 
-        public IActionResult Search(string searchText)
+        public async Task<IActionResult> MainSearch(string searchText)
         {
-            var products =_context.Products
+            var products = await _context.Products
                                 .Include(m => m.Images)
                                 .Include(m => m.ProductCategories)?
-                                .OrderByDescending(m => m.Id)
-                                .Where(m => !m.SoftDelete && m.Name.ToLower().Contains(searchText.ToLower()))
+                                .Where(m => !m.SoftDelete && m.Name.ToLower().Trim().Contains(searchText.ToLower().Trim()))
                                 .Take(6)
-                                .ToList();
+                                .ToListAsync();
 
-                          
+            return View(products);
+        }
 
 
+
+        public async Task<IActionResult> Search(string searchText)
+        {
+            List<Product> products = await _context.Products.Include(m => m.Images)
+                                            .Include(m => m.ProductCategories)
+                                            .Include(m => m.ProductSizes)
+                                            .Include(m => m.ProductTags)
+                                            .Include(m => m.Comments)
+                                            .Where(m => m.Name.ToLower().Contains(searchText.ToLower()))
+                                            .Take(5)
+                                            .ToListAsync();
             return PartialView("_SearchPartial", products);
         }
 
 
+
+        public async Task<IActionResult> ProductDetail(int? id)
+        {
+            Product product = await _productService.GetFullDataById((int) id);
+            Dictionary<string, string> headerBackgrounds = _context.HeaderBackgrounds.AsEnumerable().ToDictionary(m => m.Key, m => m.Value);
+
+            ProductDetailVM model = new()
+            {
+                ProductDetail = product,
+                HeaderBackgrounds = headerBackgrounds,
+            };
+
+            return View(model);
+        }
 
 
     }

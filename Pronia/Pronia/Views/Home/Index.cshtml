@@ -195,13 +195,13 @@
                                             </div>
                                             <div class="rating-box">
                                                 <ul>
-                                                    @for (int i = 0; i < Model.FeaturedProduct.FirstOrDefault().Rate; i++)
+                                                    @for (int i = 0; i < featured.Rate; i++)
                                                     {
                                                         <li><i class="fa fa-star"></i></li>
                                                     }
-                                                    @for (int i = 0; i < 5 - (int)Model.FeaturedProduct.FirstOrDefault().Rate; i++)
+                                                    @for (int i = 0; i < 5 - featured.Rate; i++)
                                                     {
-                                                        <li><i class="fa fa-star" style="color: darkgray"></i></li>
+                                                        <li><i class="fa fa-star" style="color: gray"></i></li>
 
                                                     }
 
@@ -218,13 +218,12 @@
 
 
 
-
                     <div class="tab-pane fade"
                          id="bestseller"
                          role="tabpanel"
                          aria-labelledby="bestseller-tab">
                         <div class="product-item-wrap row">
-                            @foreach (var bestseller in Model.BestSellerProduct)
+                            @foreach (var bestseller in Model.BestSellerProduct.Take(8))
                             {
                                 <div class="col-xl-3 col-md-4 col-sm-6">
                                     <div class="product-item">
@@ -284,11 +283,11 @@
                                             </div>
                                             <div class="rating-box">
                                                 <ul>
-                                                    @for (int i = 0; i < Model.BestSellerProduct.FirstOrDefault().Rate; i++)
+                                                    @for (int i = 0; i < bestseller.Rate; i++)
                                                     {
                                                         <li><i class="fa fa-star"></i></li>
                                                     }
-                                                    @for (int i = 0; i < 5 - (int)Model.BestSellerProduct.FirstOrDefault().Rate; i++)
+                                                    @for (int i = 0; i < 5 - bestseller.Rate; i++)
                                                     {
                                                         <li><i class="fa fa-star" style="color: darkgray"></i></li>
 
@@ -371,11 +370,11 @@
                                             </div>
                                             <div class="rating-box">
                                                 <ul>
-                                                    @for (int i = 0; i < Model.LatestProduct.FirstOrDefault().Rate; i++)
+                                                    @for (int i = 0; i < latestProduct.Rate; i++)
                                                     {
                                                         <li><i class="fa fa-star"></i></li>
                                                     }
-                                                    @for (int i = 0; i < 5 - (int)Model.LatestProduct.FirstOrDefault().Rate; i++)
+                                                    @for (int i = 0; i < 5 - latestProduct.Rate; i++)
                                                     {
                                                         <li><i class="fa fa-star" style="color: darkgray"></i></li>
 

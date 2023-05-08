@@ -89,26 +89,39 @@
 
 
 
-    //filtered
+    //search
 
-    $(document).on("click", ".select", function (e) {
+    $(document).on("submit", ".hm-searchbox", function (e) {
         e.preventDefault();
-        console.log(this);
-        let colorId = $(this).attr("data-id");
-        let parent = $(".product-grid-view")
+        let value = $(".input-search").val();
+        let url = `/shop/mainsearch?searchText=${value}`;
+
+        window.location.assign(url);
+ 
+    })
+
+
+
+
+    //SEARCH WITH li
+
+    $(document).on("keyup", ".input-field", function () {
+        debugger
+        $("#search-list li").slice(1).remove();
+        let value = $(".input-field").val();
 
         $.ajax({
 
-            url: `shop/GetProductByColor?id=${colorId}`,
+            url: `shop/search?searchText=${value}`,
+
             type: "Get",
 
             success: function (res) {
-
-                $(parent).html(res)
+                $("#search-list").append(res);
             }
+
         })
 
-
-
     })
+
 })
