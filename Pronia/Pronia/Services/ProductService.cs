@@ -47,18 +47,29 @@ namespace Pronia.Services
 
 
 
-        public async Task<List<Product>> GetPaginatedDatas(int page, int take) 
+        public async Task<List<Product>> GetPaginatedDatas(int page, int take,int? cateId) 
         {
-            return await _context.Products
-                                .Include(m => m.ProductSizes)
-                                .Include(m => m.ProductTags)
-                                .Include(m => m.Color)
-                                .Include(m => m.Comments)
-                                .Include(m => m.ProductCategories)?
-                                .Include(m => m.Images)
-                                .Where(m=>!m.SoftDelete)
-                                .Skip((page * take) - take)
-                                .Take(take).ToListAsync();
+            List<Product> products = null;
+            if (cateId == null)
+            {
+                products =  await _context.Products
+                    .Include(m => m.ProductSizes)
+                    .Include(m => m.ProductTags)
+                    .Include(m => m.Color)
+                    .Include(m => m.Comments)
+                    .Include(m => m.ProductCategories)?
+                    .Include(m => m.Images)
+                    .Where(m => !m.SoftDelete)
+                    .Skip((page * take) - take)
+                    .Take(take).ToListAsync();
+
+            }
+            else
+            {
+                products = await _context.ProductCategories.Where(m=>m.Category.Id == cateId).Select(m => m.Product).Where(m => !m.SoftDelete).Skip((page * take) - take).Take(take).ToListAsync();
+            }
+
+            return products;
        
         }
 

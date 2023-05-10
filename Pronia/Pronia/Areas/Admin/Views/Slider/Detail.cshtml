@@ -1,0 +1,50 @@
+﻿@model Slider
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+<div class="container my-5">
+    <form class="forms-sample" asp-action="Edit" method="post" enctype="multipart/form-data">
+
+        <div class="mt-3" >
+
+                <img src="~/assets/images/website-images//@Model.Image" style="width: 250px; height: 250px;" />
+
+        </div>
+
+        <div class="mt-3">
+            <label for="formFile" class="form-label my-2">Title</label>
+            <input class="form-control" id="customFile" disabled asp-for="Title" />
+        </div>
+        <div class="mt-3">
+            <label for="formFile" class="form-label my-2">Offer</label>
+            <input type="text" step=".01" class="form-control" id="customFile" disabled asp-for="Offer" />
+        </div>
+        <div class="mt-3">
+            <label for="formFile" class="form-label my-2">Add Description</label>
+            <textarea class="form-control" id="description-text" asp-for="Description" disabled rows="5"></textarea>
+        </div>
+
+        <div class="buttons my-3">
+
+            <a class="btn btn-light" asp-action="Index">Back</a>
+        </div>
+
+    </form>
+
+</div>
+
+@section Scripts{
+
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/ckeditor/ckeditor.js"></script> 
+    <script>
+        CKEDITOR.replace("description-text")  
+    </script>
+
+ }
+
+
+

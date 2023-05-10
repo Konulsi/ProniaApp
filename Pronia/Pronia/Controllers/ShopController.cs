@@ -36,9 +36,9 @@ namespace Pronia.Controllers
 
         }
 
-        public async Task<IActionResult>  Index(int page = 1, int take = 4)
+        public async Task<IActionResult>  Index(int page = 1, int take = 5, int? cateId = null)
         {
-            List<Product> paginateProduct = await _productService.GetPaginatedDatas(page, take);
+            List<Product> paginateProduct = await _productService.GetPaginatedDatas(page, take, cateId);
             int pageCount = await GetPageCountAsync(take);
 
             Paginate<Product> paginateDatas = new(paginateProduct, page, pageCount);

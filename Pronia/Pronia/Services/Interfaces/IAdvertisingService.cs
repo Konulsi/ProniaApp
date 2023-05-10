@@ -6,5 +6,7 @@ namespace Pronia.Services.Interfaces
     {
         Task<List<Advertising>> GetAll();
 
+        Task<Advertising> GetById(int? id);
+
     }
 }

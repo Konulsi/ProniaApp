@@ -1,0 +1,67 @@
+﻿@model List<Advertising>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="container my-5">
+    <a class="btn btn-success" style="float: right;" asp-action="Create">Create</a>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Image
+                    </th>
+                    <th>
+                        Name
+                    </th>
+
+                    <th>
+                        Operations
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var advertising in Model)
+                {
+                    <tr>
+                        <td class="py-1">
+                            <div style="width: 150px; height: 150px; display:flex; align-items: center">
+                                <img src="~/assets/images/website-images//@advertising.Image"  alt="image" style="width: 100%" />
+                            </div>
+                        </td>
+                        <td class="py-1">
+                            @advertising.Name
+                        </td>
+
+                        <td>
+                            <a class="btn btn-outline-info" asp-action="Detail" asp-route-id="@advertising.Id">Info</a>
+                            <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@advertising.Id">Edit</a>
+
+                            <form asp-action="Delete" asp-route-id="@advertising.Id" method="post" style="display: inline-block">
+                                <button type="submit" class="btn btn-outline-danger">Delete</button>
+                            </form>
+                        </td>
+
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+@section Scripts{
+    <script src="~/Admin/js/admin.js"></script>
+}
+
+
+
+
+

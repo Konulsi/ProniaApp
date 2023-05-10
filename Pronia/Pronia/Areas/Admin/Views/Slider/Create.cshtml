@@ -1,0 +1,55 @@
+﻿@model SliderCreateVM
+
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container my-5">
+
+    <form class="form-sample" asp-action="Create" method="post" enctype="multipart/form-data">
+
+        <div class="form-group">
+            <label for="formFile" class="form-label my-2">Choose an image for slider</label>
+            <input class="form-control" id="customFile" asp-for="Photo" />
+            <span class="text-danger" asp-validation-for="Photo">@ViewBag.error</span>
+        </div>
+
+        <div class="form-group">
+            <label for="formFile" class="form-label my-2">Add title</label>
+            <input class="form-control" id="customFile" asp-for="Title" />
+            <span class="text-danger" asp-validation-for="Title">@ViewBag.error</span>
+        </div>
+
+
+        <div class="form-group">
+            <label for="formFile" class="form-label my-2">Add description</label>
+            <textarea class="form-control" id="description-text" asp-for="Description" rows="5"></textarea>
+            <span class="text-danger" asp-validation-for="Description">@ViewBag.error</span>
+        </div>
+
+
+        <div class="form-group">
+            <label for="formFile" class="form-label my-2">Add Offer</label>
+            <input class="form-control" id="customFile" asp-for="Offer" />
+            <span class="text-danger" asp-validation-for="Offer">@ViewBag.error</span>
+        </div>
+
+
+        <div class="buttons my-3">
+            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+            <a class="btn btn-light" asp-action="Index">Cancel</a>
+        </div>
+
+    </form>
+</div>
+
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace("description-text");
+    </script>
+}
+

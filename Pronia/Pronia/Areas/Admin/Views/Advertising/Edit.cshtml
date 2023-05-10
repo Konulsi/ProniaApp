@@ -1,0 +1,36 @@
+﻿@model AdvertisingUpdateVM
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+<div class="container mt-5">
+
+    <div class="img-detail">
+     <img src="~/assets/images/website-images//@Model.Image" style="width: 250px; height: 250px;" />
+
+    </div>
+    <form class="forms-sample" method="post" asp-action="Edit" enctype="multipart/form-data">
+
+        <div class="form-group mt-5">
+            <label for="formFile" class="form-label">Choose an image for advertising</label>
+            <input class="form-control" type="file" id="formFile" asp-for="Photo" />
+        </div>
+        <div class="form-group mt-5">
+            <label for="formFile" class="form-label">Add name</label>
+            <input type="text" asp-for="Name">
+            <span class="text-danger" asp-validation-for="Name"></span>
+        </div>
+        <div class="form-group mt-5">
+            <label for="formFile" class="form-label">Add description</label>
+            <input class="form-control" type="text" id="formFile" asp-for="Description">
+            <span class="text-danger" asp-validation-for="Description"></span>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary mr-2">Submit</button>
+        <button asp-action="Index" class="btn btn-dark">Cancel</button>
+    </form>
+
+</div>
+

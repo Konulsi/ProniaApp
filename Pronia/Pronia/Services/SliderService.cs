@@ -17,5 +17,11 @@ namespace Pronia.Services
         {
             return await _context.Sliders.Where(m => !m.SoftDelete).ToListAsync();
         }
+
+        public async Task<Slider> GetById(int? id)
+        {
+            return await _context.Sliders.Where(m => !m.SoftDelete).FirstOrDefaultAsync(s=>s.Id == id);
+        }
+
     }
 }
