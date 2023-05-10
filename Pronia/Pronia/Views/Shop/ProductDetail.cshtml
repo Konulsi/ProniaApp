@@ -460,7 +460,7 @@
                             {
                                 <div class="swiper-slide product-item">
                                     <div class="product-img">
-                                        <a href="single-product-variable.html">
+                                        <a asp-action="ProductDetail" asp-route-id="@relatedProduct.Id">
                                             <img class="primary-img"
                                              src="~/assets/images/website-images/@relatedProduct.MainImage"
                                              alt="product ımages" />
@@ -510,7 +510,7 @@
                                     </div>
                                     <div class="product-content">
                                         <a class="product-name"
-                                       href="single-product-variable.html">@relatedProduct.Name</a>
+                                      asp-action="ProductDetail" asp-route-id="@relatedProduct.Id">@relatedProduct.Name</a>
                                         <div class="price-box pb-1">
                                             <span class="new-price">$@relatedProduct.Price</span>
                                         </div>

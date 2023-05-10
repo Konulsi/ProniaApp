@@ -148,4 +148,74 @@
     })
 
 
+
+    //get products by category on click category (About page)
+
+
+    $(document).on("click", ".category", function (e) {
+        e.preventDefault();
+        let categoryId = $(this).attr("data-id");
+        let parent = $(".product-grid-view")
+
+        $.ajax({
+
+            url: `blog/GetProductsByCategory?id=${categoryId}`,
+            type: "Get",
+
+            success: function (res) {
+
+                $(parent).html(res)
+            }
+        })
+
+
+
+    })
+
+    //get All products by category  (About page)
+
+
+    $(document).on("click", ".all-products", function (e) {
+        e.preventDefault();
+        let parent = $(".product-grid-view")
+
+        $.ajax({
+
+            url: "blog/GetAllProduct",
+            type: "Get",
+
+            success: function (res) {
+
+                $(parent).html(res)
+            }
+        })
+
+
+
+    })
+
+
+
+    $(document).on("click", ".product-tag", function (e) {
+        e.preventDefault();
+
+        let tagId = $(this).attr("data-id");
+        let parent = $(".product-grid-view")
+
+        $.ajax({
+
+            url: `blog/GetProductsByTag?id=${tagId}`,
+            type: "Get",
+
+            success: function (res) {
+
+                $(parent).html(res)
+            }
+        })
+
+
+
+    })
+
+
 })

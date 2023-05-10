@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Packaging;
 using Pronia.Data;
 using Pronia.Helpers;
 using Pronia.Models;
@@ -87,6 +88,7 @@ namespace Pronia.Controllers
             return PartialView("_ProductsPartial", products);
         }
 
+
         public async Task<IActionResult> GetAllProduct()
         {
             List<Product> products = await _productService.GetAll();
@@ -101,6 +103,7 @@ namespace Pronia.Controllers
 
             return PartialView("_ProductsPartial", products);
         }
+
 
 
         public async Task<IActionResult> MainSearch(string searchText)
@@ -135,12 +138,25 @@ namespace Pronia.Controllers
         public async Task<IActionResult> ProductDetail(int? id)
         {
             Product product = await _productService.GetFullDataById((int) id);
-            //int cateId = product.ProductCategories.FirstOrDefault(m=>m.Category.Name == "Plant For Gift").CategoryId;
             Dictionary<string, string> headerBackgrounds = _context.HeaderBackgrounds.AsEnumerable().ToDictionary(m => m.Key, m => m.Value);
             List<Advertising> advertisings = await _advertisingService.GetAll();
-            //List<Product> releatedProducts = await _context.ProductCategories.Where(m => m.Category.Id == cateId).Select(m => m.Product).ToListAsync();
 
-            List<Product> releatedProducts = await _context.ProductCategories.Where(m => m.Category.Id == id).Select(m => m.Product).ToListAsync();
+            //List<Product> releatedProducts = await _context.ProductCategories.Where(m => m.Category.Id == id).Select(m => m.Product).ToListAsync();
+
+            //var releatedProducts = await _context.Products.Include(m => m.ProductCategories).ThenInclude(m => m.Category).ToListAsync();
+
+            List<Category> categories = await _categoryService.GetCategories();
+
+            List<Product> releatedProducts = new();
+
+            foreach (var category in categories)
+            {
+                Product releatedProduct = await _context.ProductCategories.Where(m => m.Category.Id == category.Id).Select(m => m.Product).FirstAsync();
+              releatedProducts.Add(releatedProduct);
+
+
+            }
+
 
 
             ProductDetailVM model = new()
