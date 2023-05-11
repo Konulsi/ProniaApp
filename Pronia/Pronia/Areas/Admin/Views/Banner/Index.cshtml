@@ -1,0 +1,78 @@
+﻿@model List<Banner>
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="container my-5">
+    <h4 class="card-title">Slider</h4>
+    <a class="btn btn-success text-white" asp-action="Create" style="float:right">Create</a>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Image
+                    </th>
+                    <th>
+                        Tittle
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        IsLarge
+                    </th>
+
+                    <th>
+                        Operations
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var bannner in Model)
+                {
+                    <tr>
+                        <td class="py-1">
+                            <img src="~/assets/images/website-images//@bannner.Image" style="width:70px;height:70px" alt="image" />
+                        </td>
+                        <td class="py-1">
+                            @bannner.Title
+                        </td>
+                        <td class="py-1">
+                            @Html.Raw(bannner.Name)
+
+                        </td>
+
+                        <td data-id="@bannner.Id">
+                            @if (bannner.IsLarge)
+                            {
+
+                                <div class="active-status slider-status"></div>
+                            }
+                            else
+                            {
+                                <div class="deActive-status slider-status"></div>
+                            }
+                        </td>
+                        <td style="display: flex; gap: 10px;">
+                            <a class="btn btn-outline-info" asp-action="Detail" asp-route-id="@bannner.Id">Info</a>
+                            <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@bannner.Id">Edit</a>
+                            <form asp-action="Delete" asp-route-id="@bannner.Id" method="post">
+                                <button type="submit" class="btn btn-outline-danger">Delete</button>
+                            </form>
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+
+
+</div>
+
+

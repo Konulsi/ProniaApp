@@ -1,0 +1,43 @@
+﻿@model ClientCreateVM
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container my-5">
+
+    <form class="form-sample" asp-action="Create" method="post" enctype="multipart/form-data">
+
+        <div class="form-group">
+            <label for="formFile" class="form-label my-2">Photos</label>
+            <input class="form-control" id="customFile" asp-for="Photo" />
+            <span class="text-danger" asp-validation-for="Photo"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="formFile" class="form-label my-2">Title</label>
+            <input class="form-control" id="customFile" asp-for="Name" />
+            <span class="text-danger" asp-validation-for="Name"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="formFile" class="form-label my-2">Description</label>
+            <input class="form-control" id="customFile" asp-for="Description" />
+            <span class="text-danger" asp-validation-for="Description"></span>
+        </div>
+
+        <div class="buttons my-3">
+            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+            <a class="btn btn-light" asp-action="Index">Cancel</a>
+        </div>
+
+    </form>
+</div>
+
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+
+}
+
+

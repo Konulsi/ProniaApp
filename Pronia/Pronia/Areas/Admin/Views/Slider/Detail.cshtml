@@ -1,50 +1,60 @@
 ﻿@model Slider
-
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Detail";
 }
 
-
 <div class="container my-5">
-    <form class="forms-sample" asp-action="Edit" method="post" enctype="multipart/form-data">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Image
+                </th>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Offer
+                </th>
+                <th>
+                    Description
+                </th>
 
-        <div class="mt-3" >
+            </tr>
+        </thead>
 
-                <img src="~/assets/images/website-images//@Model.Image" style="width: 250px; height: 250px;" />
+        <tbody>
 
-        </div>
+            <tr>
 
-        <div class="mt-3">
-            <label for="formFile" class="form-label my-2">Title</label>
-            <input class="form-control" id="customFile" disabled asp-for="Title" />
-        </div>
-        <div class="mt-3">
-            <label for="formFile" class="form-label my-2">Offer</label>
-            <input type="text" step=".01" class="form-control" id="customFile" disabled asp-for="Offer" />
-        </div>
-        <div class="mt-3">
-            <label for="formFile" class="form-label my-2">Add Description</label>
-            <textarea class="form-control" id="description-text" asp-for="Description" disabled rows="5"></textarea>
-        </div>
+                <td class="py-1">
+                    <img src="~/assets/images/website-images//@Model.Image" style="width:250px;height:200px" />
 
-        <div class="buttons my-3">
+                </td>
 
-            <a class="btn btn-light" asp-action="Index">Back</a>
-        </div>
+                <td class="py-1">
+                    @Model.Title
 
-    </form>
+                </td>
 
+                <td class="py-1">
+                    @Model.Offer
+
+                </td>
+                <td class="py-1">
+                    @Html.Raw(Model.Description)
+
+                </td>
+            </tr>
+
+
+        </tbody>
+    </table>
+
+
+    <a class="btn btn-info mt-3" asp-action="Index">Back</a>
 </div>
 
-@section Scripts{
-
-    <partial name="_ValidationScriptsPartial" />
-    <script src="~/ckeditor/ckeditor.js"></script> 
-    <script>
-        CKEDITOR.replace("description-text")  
-    </script>
-
- }
 
 
 

@@ -1,0 +1,32 @@
+﻿@model Brand
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<div class="container my-5">
+
+    <table class="table table-striped">
+
+        <thead>
+            <tr>
+                <th>
+                    Image
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td class="py-1">
+                    <img src="~/assets/images/website-images//@Model.Image" style="width:250px;height:200px" />
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+    <a class="btn btn-info mt-3" asp-action="Index">Back</a>
+</div>
+
+
+
+

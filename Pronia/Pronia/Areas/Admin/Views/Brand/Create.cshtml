@@ -1,0 +1,27 @@
+﻿@model BrandCreateVM
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container my-5">
+
+    <form class="form-sample" asp-action="Create" method="post" enctype="multipart/form-data">
+
+        <div class="form-group">
+            <label for="formFile" class="form-label">Choose a new image for brand</label>
+            <input class="form-control" id="customFile" asp-for="Photo" />
+            <span class="text-danger" asp-validation-for="Photo"></span>
+        </div>
+
+        <div class="buttons my-3">
+            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+            <a class="btn btn-light" asp-action="Index">Cancel</a>
+        </div>
+
+    </form>
+</div>
+
+@section Scripts{
+    <script src="~/Admin/ckeditor/ckeditor.js"></script>
+
+}

@@ -62,11 +62,15 @@ namespace Pronia.Services
                     .Where(m => !m.SoftDelete)
                     .Skip((page * take) - take)
                     .Take(take).ToListAsync();
-
             }
             else
             {
-                products = await _context.ProductCategories.Where(m=>m.Category.Id == cateId).Select(m => m.Product).Where(m => !m.SoftDelete).Skip((page * take) - take).Take(take).ToListAsync();
+                products = await _context.ProductCategories
+                    .Where(m => m.Category.Id == cateId)
+                    .Select(m => m.Product)
+                    .Where(m => !m.SoftDelete)
+                    .Skip((page * take) - take).Take(take).ToListAsync();
+
             }
 
             return products;

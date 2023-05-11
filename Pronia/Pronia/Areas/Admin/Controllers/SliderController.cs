@@ -160,7 +160,7 @@ namespace Pronia.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int? id, SliderCreateVM slider)
+        public async Task<IActionResult> Edit(int? id, SliderUpdateVM slider)
         {
             try
             {

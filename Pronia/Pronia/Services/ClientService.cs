@@ -14,5 +14,8 @@ namespace Pronia.Services
             _context = context;
         }
         public async Task<List<Client>> GetClients() => await _context.Clients.Where(m => !m.SoftDelete).ToListAsync();
+
+        public async Task<Client> GetById(int? id) => await _context.Clients.Where(m => !m.SoftDelete).FirstOrDefaultAsync(m => m.Id == id);
+
     }
 }

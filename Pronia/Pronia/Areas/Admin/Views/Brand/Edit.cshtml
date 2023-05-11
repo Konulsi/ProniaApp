@@ -1,0 +1,30 @@
+﻿@model BrandUpdateVM
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container my-5">
+
+    <div class="img-detail">
+        <img src="~/assets/images/website-images//@Model.Image" style="width:250px;height:200px" />
+    </div>
+
+    <form class="form-sample" method="post" enctype="multipart/form-data">
+        <label for="formFile" class="form-label">Choose a new image for brand</label>
+        <input type="file" class="form-control" id="customFile" asp-for="Photo" />
+
+        <div class="buttons my-3">
+            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+            <a class="btn btn-light" asp-action="Index">Cancel</a>
+        </div>
+
+
+    </form>
+
+</div>
+
+@section Scripts{
+     <script src="~/Admin/ckeditor/ckeditor.js"></script>
+
+}
+

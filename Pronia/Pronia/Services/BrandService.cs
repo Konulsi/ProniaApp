@@ -15,5 +15,9 @@ namespace Pronia.Services
         }
 
         public async Task<List<Brand>> GetBrands() => await _context.Brands.Where(m => !m.SoftDelete).ToListAsync();
+
+        public async Task<Brand> GetByIdAsync(int? id) => await _context.Brands.Where(m => !m.SoftDelete).FirstOrDefaultAsync(m => m.Id == id);
+
+        
     }
 }
