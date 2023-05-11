@@ -20,6 +20,13 @@ namespace Pronia.Services
                                                                    .Include(m => m.Comments)
                                                                    .ToListAsync();
 
+        public async Task<Blog> GetByIdAsync(int? id) => await _context.Blogs
+                                                                   .Where(m => !m.SoftDelete)
+                                                                   .Include(m => m.Images)
+                                                                   .Include(m => m.Author)
+                                                                   .Include(m => m.Comments)
+                                                                   .FirstOrDefaultAsync(m => m.Id == id);
+
         public async Task<int> GetCountAsync() => await _context.Blogs.CountAsync();
 
 

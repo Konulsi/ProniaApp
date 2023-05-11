@@ -1,0 +1,52 @@
+﻿@model List<Color>
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="container my-5">
+    <a class="btn btn-success text-white" asp-action="Create" style="float:right">Create</a>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+
+                    <th>
+                        Operations
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var color in Model)
+                {
+                    <tr>
+
+                        <td class="py-1">
+                            @color.Name
+                        </td>
+
+
+                        <td style="display: flex; gap: 10px;">
+                            <form asp-action="Delete" asp-route-id="@color.Id" method="post">
+                                <button type="submit" class="btn btn-outline-danger">Delete</button>
+                            </form>
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+
+
+</div>
+
+
+
+
