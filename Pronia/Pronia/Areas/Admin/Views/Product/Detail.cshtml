@@ -1,0 +1,99 @@
+﻿@model ProductDetailVM
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<div class="container my-5">
+    <div class="form-group d-flex">
+        <div>
+            <p class="my-2">Main Image</p>
+            <img src="~/assets/images/website-images//@Model.MainImage" style="width: 150px; height: 150px;" />
+        </div>
+        <div>
+            <p class="my-2">Hover Image</p>
+            <img src="~/assets/images/website-images//@Model.HoverImage" style="width: 150px; height: 150px;" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="my-2">Name</label>
+        <input class="form-control" disabled id="customFile" asp-for="Name" />
+    </div>
+
+    <div class="form-group">
+        <label class="my-2">Description</label>
+        <textarea class="form-control" id="description-text" disabled asp-for="Description" rows="5"></textarea>
+    </div>
+    <div class="form-group">
+        <label class="my-2">Price</label>
+        <input type="text" disabled class="form-control" id="customFile" asp-for="Price" />
+    </div>
+    <div class="form-group">
+        <label class="my-2">Sale Count</label>
+        <input class="form-control" disabled id="customFile" asp-for="SaleCount" />
+    </div>
+    <div class="form-group">
+        <label class="my-2">Stock Count</label>
+        <input class="form-control" disabled id="customFile" asp-for="StockCount" />
+    </div>
+    <div class="form-group">
+        <label class="my-2">SKU</label>
+        <input class="form-control" disabled id="customFile" asp-for="SKU" />
+    </div>
+    <div class="form-group">
+@*        <label class="my-2">Rate</label>
+        <input class="form-control" disabled id="customFile" asp-for="Rate" />*@
+     <label class="my-2">Rate</label>
+     @*<input class="form-control" disabled id="customFile" asp-for="Rate" />*@
+     <div class="rating-box">
+
+        <ul>
+            @for (int i = 0; i < Model.Rate; i++)
+            {
+                <li><i class="fa fa-star"></i></li>
+            }
+            @for (int i = 0; i < 5 - Model.Rate; i++)
+            {
+                <li><i class="fa fa-star" style="color: darkgray"></i></li>
+
+            }
+        </ul>
+    </div>
+    </div>
+    <div class="form-group">
+        <label class="my-2">Category</label>
+
+        <input class="form-control" disabled id="customFile" value="@string.Join(", ", Model.ProductCategories.Select(m=>m.Category.Name))" />
+
+    </div>
+
+    <div class="form-group">
+        <label class="my-2">Size</label>
+        <input class="form-control" disabled id="customFile" value="@string.Join(", ",Model.ProductSizes.Select(m=>m.Size.Name))" />
+    </div>
+
+    <div class="form-group">
+        <label class="my-2">Tag</label>
+        <input class="form-control" disabled id="customFile" value="@string.Join(", ",Model.ProductTags.Select(m=>m.Tag.Name))" />
+    </div>
+
+    <div class="form-group">
+        <label class="my-2">Color</label>
+        <input class="form-control" disabled id="customFile" asp-for="@Model.ColorName" />
+    </div>
+
+        <div class="form-group">
+            <div class="buttons my-3">
+                <a class="btn btn-info" asp-action="Index">Cancel</a>
+            </div>
+        </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace("description-text");
+    </script>
+}
+
