@@ -1,0 +1,28 @@
+﻿@model ColorUpdateVM
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+<div class="container my-5">
+
+
+    <form class="form-sample" method="post" >
+        <input class="form-control" id="customFile" asp-for="Name" />
+        <span class="text-danger" asp-validation-for="Name">@ViewBag.error</span>
+
+        <div class="buttons my-3">
+            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+            <a class="btn btn-light" asp-action="Index">Cancel</a>
+        </div>
+
+    </form>
+
+</div>
+
+@section Scripts{
+    <script src="~/Admin/ckeditor/ckeditor.js"></script>
+
+}
+

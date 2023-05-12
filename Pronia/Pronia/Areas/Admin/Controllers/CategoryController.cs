@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Pronia.Areas.Admin.ViewModels;
 using Pronia.Data;
-using Pronia.Helpers;
 using Pronia.Models;
 using Pronia.Services;
 using Pronia.Services.Interfaces;
@@ -10,32 +9,32 @@ namespace Pronia.Areas.Admin.Controllers
 {
     [Area("Admin")]
 
-    public class ColorController : Controller
+    public class CategoryController : Controller
     {
         private readonly AppDbContext _context;
-        private readonly IColorService _colorService;
+        private ICategoryService _categoryService;
+        public CategoryController(AppDbContext context,
+                                ICategoryService categoryService)
 
-        public ColorController(AppDbContext context,
-                              IColorService colorService )
         {
             _context = context;
-            _colorService = colorService;
+            _categoryService = categoryService;
         }
-
         public async Task<IActionResult> Index()
         {
-            List<Color> colors = await _colorService.GetAllColors();
-
-            return View(colors);
+            List<Category> dbCategory = await _categoryService.GetCategories();
+            return View(dbCategory);
         }
+
 
         public async Task<IActionResult> Detail(int? id)
         {
             if (id == null) return BadRequest();
-            Color color = await _colorService.GetByIdAsync(id);
-            if (color is null) return NotFound();
-            return View(color);
+            Category dbCategory = await _categoryService.GetByIdAsync(id);
+            if (dbCategory is null) return NotFound();
+            return View(dbCategory);
         }
+
 
 
 
@@ -48,24 +47,25 @@ namespace Pronia.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(ColorCreateVM color)
+        public async Task<IActionResult> Create(CategoryCreatVM model)
         {
             try
             {
                 if (!ModelState.IsValid)
                 {
-                    return View(color);
+                    return View(model);
                 }
 
 
 
-                Color newColor = new()
+                Category newCategory = new()
+
                 {
-                    Name = color.Name,
+                    Name = model.Name,
 
                 };
 
-                await _context.Colors.AddAsync(newColor);
+                await _context.Categories.AddAsync(newCategory);
                 await _context.SaveChangesAsync();
 
                 return RedirectToAction(nameof(Index));
@@ -79,7 +79,6 @@ namespace Pronia.Areas.Admin.Controllers
 
 
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int? id)
@@ -87,14 +86,12 @@ namespace Pronia.Areas.Admin.Controllers
             try
             {
                 if (id == null) return BadRequest();
-
-                Color dbColor = await _colorService.GetByIdAsync(id);
-
-                if (dbColor is null) return NotFound();
+                Category dbCategory = await _categoryService.GetByIdAsync(id);
+                if (dbCategory is null) return NotFound();
 
 
 
-                _context.Colors.Remove(dbColor);
+                _context.Categories.Remove(dbCategory);
 
                 await _context.SaveChangesAsync();
 
@@ -110,16 +107,18 @@ namespace Pronia.Areas.Admin.Controllers
 
 
 
+
+
         [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null) return BadRequest();
-            Color dbColor = await _colorService.GetByIdAsync(id);
-            if (dbColor is null) return NotFound();
+            Category dbCategory = await _categoryService.GetByIdAsync(id);
+            if (dbCategory is null) return NotFound();
 
-            ColorUpdateVM model = new()
+            CategoryUpdateVM model = new()
             {
-                Name = dbColor.Name,
+                Name = dbCategory.Name,
             };
 
             return View(model);
@@ -129,20 +128,17 @@ namespace Pronia.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int? id, ColorUpdateVM colorUpdate)
+        public async Task<IActionResult> Edit(int? id, CategoryUpdateVM categoryUpdate)
         {
             try
             {
-
                 if (id == null) return BadRequest();
+                Category dbCategory = await _categoryService.GetByIdAsync(id);
+                if (dbCategory is null) return NotFound();
 
-                Color dbColor = await _colorService.GetByIdAsync(id);
-
-                if (dbColor is null) return NotFound();
-
-                ColorUpdateVM model = new()
+                CategoryUpdateVM model = new()
                 {
-                    Name = dbColor.Name,
+                    Name = dbCategory.Name,
                 };
 
 
@@ -153,7 +149,7 @@ namespace Pronia.Areas.Admin.Controllers
 
 
 
-                dbColor.Name = colorUpdate.Name;
+                dbCategory.Name = categoryUpdate.Name;
 
                 await _context.SaveChangesAsync();
 
@@ -165,6 +161,7 @@ namespace Pronia.Areas.Admin.Controllers
                 return View();
             }
         }
+
 
 
     }

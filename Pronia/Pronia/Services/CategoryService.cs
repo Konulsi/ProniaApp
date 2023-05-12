@@ -13,9 +13,9 @@ namespace Pronia.Services
         {
             _context = context;
         }
-        public async Task<List<Category>> GetCategories()
-        {
-            return await _context.Categories.Include(m => m.ProductCategories).Where(m => !m.SoftDelete).ToListAsync();
-        }
+        public async Task<List<Category>> GetCategories() => await _context.Categories.Include(m => m.ProductCategories).Where(m => !m.SoftDelete).ToListAsync();
+        
+
+        public async Task<Category> GetByIdAsync(int? id) => await _context.Categories.Include(m => m.ProductCategories).Where(m => !m.SoftDelete).FirstOrDefaultAsync(m => m.Id == id);
     }
 }

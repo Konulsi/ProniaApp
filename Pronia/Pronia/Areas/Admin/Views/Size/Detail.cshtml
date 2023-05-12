@@ -1,4 +1,4 @@
-﻿@model Color
+﻿@model Size
 @{
     ViewData["Title"] = "Detail";
 }
@@ -17,7 +17,8 @@
         <tbody>
             <tr>
                 <td class="py-1">
-                    @Model.Name
+                    @Html.Raw(@Model.Name)
+
                 </td>
             </tr>
         </tbody>

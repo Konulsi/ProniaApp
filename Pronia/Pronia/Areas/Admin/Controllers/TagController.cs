@@ -1,42 +1,39 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Pronia.Areas.Admin.ViewModels;
 using Pronia.Data;
-using Pronia.Helpers;
 using Pronia.Models;
-using Pronia.Services;
 using Pronia.Services.Interfaces;
 
 namespace Pronia.Areas.Admin.Controllers
 {
     [Area("Admin")]
-
-    public class ColorController : Controller
+    public class TagController : Controller
     {
         private readonly AppDbContext _context;
-        private readonly IColorService _colorService;
-
-        public ColorController(AppDbContext context,
-                              IColorService colorService )
+        private readonly IWebHostEnvironment _env;
+        private readonly ITagService _tagService;
+        public TagController(AppDbContext context,
+                                IWebHostEnvironment env,
+                                ITagService tagService)
         {
             _context = context;
-            _colorService = colorService;
+            _env = env;
+            _tagService = tagService;
         }
 
         public async Task<IActionResult> Index()
         {
-            List<Color> colors = await _colorService.GetAllColors();
-
-            return View(colors);
+            List<Tag> tags = await _tagService.GetAllAsync();
+            return View(tags);
         }
 
         public async Task<IActionResult> Detail(int? id)
         {
             if (id == null) return BadRequest();
-            Color color = await _colorService.GetByIdAsync(id);
-            if (color is null) return NotFound();
-            return View(color);
+            Tag tag = await _tagService.GetByIdAsync(id);
+            if (tag is null) return NotFound();
+            return View(tag);
         }
-
 
 
         [HttpGet]
@@ -46,39 +43,33 @@ namespace Pronia.Areas.Admin.Controllers
         }
 
 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(ColorCreateVM color)
+        public async Task<IActionResult> Create(TagCreateVM tag)
         {
             try
             {
-                if (!ModelState.IsValid)
+
+                Tag newTag = new()
                 {
-                    return View(color);
-                }
-
-
-
-                Color newColor = new()
-                {
-                    Name = color.Name,
-
+                    Name = tag.Name
                 };
 
-                await _context.Colors.AddAsync(newColor);
-                await _context.SaveChangesAsync();
 
+                await _context.Tags.AddAsync(newTag);
+
+
+
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
-                @ViewBag.error = ex.Message;
-                return View();
+
+                throw;
             }
         }
-
-
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -88,13 +79,11 @@ namespace Pronia.Areas.Admin.Controllers
             {
                 if (id == null) return BadRequest();
 
-                Color dbColor = await _colorService.GetByIdAsync(id);
+                Tag dbTag = await _tagService.GetByIdAsync(id);
 
-                if (dbColor is null) return NotFound();
+                if (dbTag is null) return NotFound();
 
-
-
-                _context.Colors.Remove(dbColor);
+                _context.Tags.Remove(dbTag);
 
                 await _context.SaveChangesAsync();
 
@@ -105,21 +94,19 @@ namespace Pronia.Areas.Admin.Controllers
                 ViewBag.error = ex.Message;
                 return View();
             }
-
         }
-
 
 
         [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null) return BadRequest();
-            Color dbColor = await _colorService.GetByIdAsync(id);
-            if (dbColor is null) return NotFound();
+            Tag dbTag = await _tagService.GetByIdAsync(id);
+            if (dbTag is null) return NotFound();
 
-            ColorUpdateVM model = new()
+            TagUpdateVM model = new()
             {
-                Name = dbColor.Name,
+                Name = dbTag.Name
             };
 
             return View(model);
@@ -129,20 +116,20 @@ namespace Pronia.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int? id, ColorUpdateVM colorUpdate)
+        public async Task<IActionResult> Edit(int? id, TagUpdateVM tagUpdate)
         {
             try
             {
 
                 if (id == null) return BadRequest();
 
-                Color dbColor = await _colorService.GetByIdAsync(id);
+                Tag dbTag = await _tagService.GetByIdAsync(id);
 
-                if (dbColor is null) return NotFound();
+                if (dbTag is null) return NotFound();
 
-                ColorUpdateVM model = new()
+                TagUpdateVM model = new()
                 {
-                    Name = dbColor.Name,
+                    Name = dbTag.Name
                 };
 
 
@@ -153,7 +140,7 @@ namespace Pronia.Areas.Admin.Controllers
 
 
 
-                dbColor.Name = colorUpdate.Name;
+                dbTag.Name = tagUpdate.Name;
 
                 await _context.SaveChangesAsync();
 
@@ -165,7 +152,5 @@ namespace Pronia.Areas.Admin.Controllers
                 return View();
             }
         }
-
-
     }
 }

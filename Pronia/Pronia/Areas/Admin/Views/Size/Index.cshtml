@@ -1,8 +1,7 @@
-﻿@model List<Color>
+﻿@model List<Size>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Size";
 }
-
 
 <div class="container my-5">
     <a class="btn btn-success text-white" asp-action="Create" style="float:right">Create</a>
@@ -13,7 +12,6 @@
                     <th>
                         Name
                     </th>
-
                     <th>
                         Operations
                     </th>
@@ -21,34 +19,27 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var color in Model)
+                @foreach (var size in Model)
                 {
                     <tr>
-
                         <td class="py-1">
-                            @color.Name
+                            @Html.Raw(@size.Name)
                         </td>
 
 
-                        <td style="display: flex; gap: 10px;">
-                            <a class="btn btn-outline-info" asp-action="Detail" asp-route-id="@color.Id">Info</a>
-                            <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@color.Id">Edit</a>
-                            <form style="display:inline-block" asp-action="Delete" asp-route-id="@color.Id" method="post">
+                        <td>
+                            <a class="btn btn-outline-info" asp-action="Detail" asp-route-id="@size.Id">Info</a>
+                            <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@size.Id">Edit</a>
+                            <form style="display:inline-block" asp-action="Delete" asp-route-id="@size.Id" method="post">
                                 <button type="submit" class="btn btn-outline-danger">Delete</button>
                             </form>
                         </td>
-
                     </tr>
                 }
+
 
             </tbody>
         </table>
     </div>
-
-
-
 </div>
-
-
-
 

@@ -1,4 +1,4 @@
-﻿@model List<Color>
+﻿@model List<Category>
 @{
     ViewData["Title"] = "Index";
 }
@@ -21,19 +21,19 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var color in Model)
+                @foreach (var category in Model)
                 {
                     <tr>
 
                         <td class="py-1">
-                            @color.Name
+                            @category.Name
                         </td>
 
 
                         <td style="display: flex; gap: 10px;">
-                            <a class="btn btn-outline-info" asp-action="Detail" asp-route-id="@color.Id">Info</a>
-                            <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@color.Id">Edit</a>
-                            <form style="display:inline-block" asp-action="Delete" asp-route-id="@color.Id" method="post">
+                            <a class="btn btn-outline-info" asp-action="Detail" asp-route-id="@category.Id">Info</a>
+                            <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@category.Id">Edit</a>
+                            <form style="display:inline-block" asp-action="Delete" asp-route-id="@category.Id" method="post">
                                 <button type="submit" class="btn btn-outline-danger">Delete</button>
                             </form>
                         </td>
@@ -48,6 +48,7 @@
 
 
 </div>
+
 
 
 
