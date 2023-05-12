@@ -5,6 +5,7 @@ using Pronia.Models;
 using Pronia.Services.Interfaces;
 using Pronia.Services;
 using System.Diagnostics;
+using Pronia.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,8 +22,6 @@ builder.Services.AddDbContext<AppDbContext>(option =>
 
 builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
-
-
 builder.Services.Configure<IdentityOptions>(option =>
 {
     option.Password.RequiredLength = 8;
@@ -38,6 +37,7 @@ builder.Services.Configure<IdentityOptions>(option =>
     option.Lockout.AllowedForNewUsers = true;
 
 });
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 
 
 builder.Services.AddScoped<ISliderService, SliderService>();
@@ -53,19 +53,9 @@ builder.Services.AddScoped<ITagService, TagService>();
 builder.Services.AddScoped<IBannerService, BannerService>();
 builder.Services.AddScoped<IAuthorService, AuthorService>();
 builder.Services.AddScoped<ISizeService, SizeService>();
-
-
-
-
-
-
-
-
-
-
 builder.Services.AddScoped<IAdvertisingService, AdvertisingService>();
 
-
+builder.Services.AddScoped<EmailSettings>();
 
 
 

@@ -24,6 +24,8 @@ namespace Pronia.Areas.Admin.ViewModels
 
         [Required(ErrorMessage = "Don`t be empty")]
         public int ColorId { get; set; }
+        public string SKU { get; set; }
+        public int Rate { get; set; }
 
         public ICollection<ProductImage> Images { get; set; }
 

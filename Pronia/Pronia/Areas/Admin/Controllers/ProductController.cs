@@ -432,6 +432,8 @@ namespace Pronia.Areas.Admin.Controllers
                 TagIds = dbProduct.ProductTags.Select(m => m.Tag.Id).ToList(),
                 SizeIds = dbProduct.ProductSizes.Select(m => m.Size.Id).ToList(),
                 ColorId = dbProduct.ColorId,
+                SKU = dbProduct.SKU,
+                Rate= dbProduct.Rate,
                 StockCount = dbProduct.StockCount,
                 SaleCount = dbProduct.SaleCount,
             };
@@ -461,7 +463,7 @@ namespace Pronia.Areas.Admin.Controllers
                     }
                 }
 
-                foreach (var item in updatedProduct.Images)
+                foreach (var item in dbProduct.Images)
                 {
                     string dbPath = FileHelper.GetFilePath(_env.WebRootPath, "assets/images/website-images", item.Image);
 

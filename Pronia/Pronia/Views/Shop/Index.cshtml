@@ -45,7 +45,6 @@
                         </ul>
                    
                       <button class="widgets-searchbox-btn" type="submit">
-                      @*  <i class="fa fa-search"></i>*@
                       </button>
                     </form>
                   </div>
@@ -138,8 +137,7 @@
                   </div>
                   <div class="banner-item widgets-banner img-hover-effect">
 @*                    <div class="banner-img">
-                      <img
-                        src="~/assets/images/website-images/@Model.NewProducts.FirstOrDefault().MainImage"
+                      <img src="~/assets/images/website-images/@Model.NewProducts.FirstOrDefault(m => m.IsMain).;"
                         alt="Banner Image"
                       />
                     </div>*@

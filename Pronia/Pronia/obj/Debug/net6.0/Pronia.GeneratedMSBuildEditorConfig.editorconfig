@@ -16,6 +16,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\konul\OneDrive\Masaüstü\Backend-Project\Pronia\Pronia
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/konul/OneDrive/Masaüstü/Backend-Project/Pronia/Pronia/Areas/Admin/Views/Account/AddRoleToUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWNjb3VudFxBZGRSb2xlVG9Vc2VyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/konul/OneDrive/Masaüstü/Backend-Project/Pronia/Pronia/Areas/Admin/Views/Advertising/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWR2ZXJ0aXNpbmdcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -214,6 +218,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/konul/OneDrive/Masaüstü/Backend-Project/Pronia/Pronia/Views/About/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWJvdXRcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/konul/OneDrive/Masaüstü/Backend-Project/Pronia/Pronia/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/konul/OneDrive/Masaüstü/Backend-Project/Pronia/Pronia/Views/Account/VerifyEmail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxWZXJpZnlFbWFpbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/konul/OneDrive/Masaüstü/Backend-Project/Pronia/Pronia/Views/Blog/BlogDetail.cshtml]
