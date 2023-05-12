@@ -94,7 +94,7 @@
                                                             </ul>
                                                         </div>
                                                         <h2 class="title mb-0">
-                                                            <a href="#">@blog.Description.Substring(0,15)</a>
+                                                            <a href="#">@blog.Description</a>
                                                         </h2>
                                                     </div>
                                                 </div>
@@ -118,10 +118,10 @@
                             </div>
                         </div>
                         <div class="banner-item widgets-banner img-hover-effect">
-                            <div class="banner-img">
+@*                            <div class="banner-img">
                                 <img src="~/assets/images/website-images/@Model.NewProducts.FirstOrDefault().MainImage"
                                      alt="Banner Image" />
-                            </div>
+                            </div>*@
                             <div class="banner-content text-position-center">
                                 <span class="collection">New Collection</span>
                                 <h3 class="title">Plant Port</h3>
@@ -166,7 +166,7 @@
 
                                         </a>
                                         <div class="inner-btn-wrap">
-                                            <a class="inner-btn" href="blog-detail.html">
+                                            <a class="inner-btn" asp-controller="Blog" asp-action="BlogDetail" asp-route-id="@blog.Id">
                                                 <i class="pe-7s-link"></i>
                                             </a>
                                         </div>

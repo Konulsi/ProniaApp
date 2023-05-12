@@ -141,10 +141,6 @@ namespace Pronia.Controllers
             Dictionary<string, string> headerBackgrounds = _context.HeaderBackgrounds.AsEnumerable().ToDictionary(m => m.Key, m => m.Value);
             List<Advertising> advertisings = await _advertisingService.GetAll();
 
-            //List<Product> releatedProducts = await _context.ProductCategories.Where(m => m.Category.Id == id).Select(m => m.Product).ToListAsync();
-
-            //var releatedProducts = await _context.Products.Include(m => m.ProductCategories).ThenInclude(m => m.Category).ToListAsync();
-
             List<Category> categories = await _categoryService.GetCategories();
 
             List<Product> releatedProducts = new();

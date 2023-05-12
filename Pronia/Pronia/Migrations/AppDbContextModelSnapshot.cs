@@ -576,12 +576,6 @@ namespace Pronia.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("HoverImage")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MainImage")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -658,6 +652,12 @@ namespace Pronia.Migrations
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsHover")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("bit");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -991,13 +991,13 @@ namespace Pronia.Migrations
             modelBuilder.Entity("Pronia.Models.ProductCategory", b =>
                 {
                     b.HasOne("Pronia.Models.Category", "Category")
-                        .WithMany()
+                        .WithMany("ProductCategories")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Pronia.Models.Product", "Product")
-                        .WithMany()
+                        .WithMany("ProductCategories")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1021,13 +1021,13 @@ namespace Pronia.Migrations
             modelBuilder.Entity("Pronia.Models.ProductSize", b =>
                 {
                     b.HasOne("Pronia.Models.Product", "Product")
-                        .WithMany()
+                        .WithMany("ProductSizes")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Pronia.Models.Size", "Size")
-                        .WithMany()
+                        .WithMany("ProductSizes")
                         .HasForeignKey("SizeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1040,13 +1040,13 @@ namespace Pronia.Migrations
             modelBuilder.Entity("Pronia.Models.ProductTag", b =>
                 {
                     b.HasOne("Pronia.Models.Product", "Product")
-                        .WithMany()
+                        .WithMany("ProductTags")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Pronia.Models.Tag", "Tag")
-                        .WithMany()
+                        .WithMany("ProductTags")
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1073,6 +1073,11 @@ namespace Pronia.Migrations
                     b.Navigation("Images");
                 });
 
+            modelBuilder.Entity("Pronia.Models.Category", b =>
+                {
+                    b.Navigation("ProductCategories");
+                });
+
             modelBuilder.Entity("Pronia.Models.Color", b =>
                 {
                     b.Navigation("Products");
@@ -1083,6 +1088,22 @@ namespace Pronia.Migrations
                     b.Navigation("Comments");
 
                     b.Navigation("Images");
+
+                    b.Navigation("ProductCategories");
+
+                    b.Navigation("ProductSizes");
+
+                    b.Navigation("ProductTags");
+                });
+
+            modelBuilder.Entity("Pronia.Models.Size", b =>
+                {
+                    b.Navigation("ProductSizes");
+                });
+
+            modelBuilder.Entity("Pronia.Models.Tag", b =>
+                {
+                    b.Navigation("ProductTags");
                 });
 #pragma warning restore 612, 618
         }

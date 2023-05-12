@@ -7,11 +7,11 @@
     <div class="form-group d-flex" style="gap: 5px;">
         <div>
             <p class="my-2">Main Image</p>
-            <img src="~/assets/images/website-images//@Model.MainImage" style="width: 150px; height: 150px;" />
+            <img src="~/assets/images/website-images//@Model.ProductImages.FirstOrDefault(m => m.IsMain).Image" style="width: 150px; height: 150px;" />
         </div>
         <div>
             <p class="my-2">Hover Image</p>
-            <img src="~/assets/images/website-images//@Model.HoverImage" style="width: 150px; height: 150px;" />
+            <img src="~/assets/images/website-images//@Model.ProductImages.FirstOrDefault(m => m.IsHover).Image" style="width: 150px; height: 150px;" />
         </div>
 
     </div>
@@ -90,7 +90,7 @@
 
         <div class="form-group">
             <div class="buttons my-3">
-                <a class="btn btn-info" asp-action="Index">Cancel</a>
+                <a class="btn btn-info" asp-action="Index">Back to product list</a>
             </div>
         </div>
 </div>

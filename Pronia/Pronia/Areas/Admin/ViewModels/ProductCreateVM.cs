@@ -7,11 +7,7 @@ namespace Pronia.Areas.Admin.ViewModels
     {
         [Required(ErrorMessage = "Don`t be empty")]
         public string Name { get; set; }
-        [Required(ErrorMessage = "Don`t be empty")]
-        public IFormFile MainImage { get; set; }
 
-        [Required(ErrorMessage = "Don`t be empty")]
-        public IFormFile HoverImage { get; set; }
 
         [Required(ErrorMessage = "Don`t be empty")]
         public string Description { get; set; }

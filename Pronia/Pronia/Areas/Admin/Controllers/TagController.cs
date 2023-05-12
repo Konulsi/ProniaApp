@@ -66,7 +66,7 @@ namespace Pronia.Areas.Admin.Controllers
             }
             catch (Exception ex)
             {
-
+                ViewBag.ErrorMessage = ex.Message;
                 throw;
             }
         }

@@ -459,7 +459,7 @@
                             @foreach (var relatedProduct in Model.RelatedProducts.Take(4))
                             {
                                 <div class="swiper-slide product-item">
-                                    <div class="product-img">
+                               @*     <div class="product-img">
                                         <a asp-action="ProductDetail" asp-route-id="@relatedProduct.Id">
                                             <img class="primary-img"
                                              src="~/assets/images/website-images/@relatedProduct.MainImage"
@@ -507,7 +507,7 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                    </div>
+                                    </div>*@
                                     <div class="product-content">
                                         <a class="product-name"
                                       asp-action="ProductDetail" asp-route-id="@relatedProduct.Id">@relatedProduct.Name</a>

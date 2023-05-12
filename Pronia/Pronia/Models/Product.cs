@@ -3,8 +3,7 @@
     public class Product: BaseEntity
     {
         public string Name { get; set; }
-        public string MainImage { get; set; }
-        public string HoverImage { get; set; }
+
         public string Description { get; set; }
         public decimal Price { get; set; }
         public int Rate { get; set; } = 5;

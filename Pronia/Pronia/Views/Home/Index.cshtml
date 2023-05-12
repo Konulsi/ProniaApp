@@ -140,14 +140,14 @@
                                 <div class="col-xl-3 col-md-4 col-sm-6">
                                     <div class="product-item">
                                         <div class="product-img">
-                                            <a asp-controller="shop" asp-action="ProductDetail" asp-route-id="@featured.Id">
+@*                                            <a asp-controller="shop" asp-action="ProductDetail" asp-route-id="@featured.Id">
                                                 <img class="primary-img"
                                                  src="~/assets/images/website-images//@featured.MainImage"
                                                  alt="Product Images" />
                                                 <img class="secondary-img"
                                                  src="~/assets/images/website-images//@featured.HoverImage"
                                                  alt="Product Images" />
-                                            </a>
+                                            </a>*@
                                             <div class="product-add-action">
                                                 <ul>
                                                     <li>
@@ -228,14 +228,14 @@
                                 <div class="col-xl-3 col-md-4 col-sm-6">
                                     <div class="product-item">
                                         <div class="product-img">
-                                            <a asp-controller="shop" asp-action="ProductDetail" asp-route-id="@bestseller.Id">
+@*                                            <a asp-controller="shop" asp-action="ProductDetail" asp-route-id="@bestseller.Id">
                                                 <img class="primary-img"
                                                  src="~/assets/images/website-images//@bestseller.MainImage"
                                                  alt="Product Images" />
                                                 <img class="secondary-img"
                                                  src="~/assets/images/website-images//@bestseller.HoverImage"
                                                  alt="Product Images" />
-                                            </a>
+                                            </a>*@
                                             <div class="product-add-action">
                                                 <ul>
                                                     <li>
@@ -315,14 +315,14 @@
                                 <div class="col-xl-3 col-md-4 col-sm-6">
                                     <div class="product-item">
                                         <div class="product-img">
-                                            <a asp-controller="shop" asp-action="ProductDetail" asp-route-id="@latestProduct.Id">
+@*                                            <a asp-controller="shop" asp-action="ProductDetail" asp-route-id="@latestProduct.Id">
                                                 <img class="primary-img"
                                                  src="~/assets/images/website-images//@latestProduct.MainImage"
                                                  alt="Product Images" />
                                                 <img class="secondary-img"
                                                  src="~/assets/images/website-images//@latestProduct.HoverImage"
                                                  alt="Product Images" />
-                                            </a>
+                                            </a>*@
                                             <div class="product-add-action">
                                                 <ul>
                                                     <li>
@@ -490,7 +490,7 @@
                         @foreach (var newProduct in Model.NewProducts)
                         {
                             <div class="swiper-slide product-item">
-                                <div class="product-img">
+                            @*    <div class="product-img">
                                     <a asp-controller="shop" asp-action="ProductDetail" asp-route-id="@newProduct.Id">
                                         <img class="primary-img"
                                          src="~/assets/images/website-images//@newProduct.MainImage"
@@ -538,7 +538,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                </div>
+                                </div>*@
                                 <div class="product-content">
                                     <a class="product-name" href="shop.html">@newProduct.Name</a>
                                     <div class="price-box pb-1">

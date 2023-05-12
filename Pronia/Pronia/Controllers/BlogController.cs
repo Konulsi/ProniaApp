@@ -118,5 +118,37 @@ namespace Pronia.Controllers
 
             return PartialView("_ProductsPartial", products);
         }
+
+
+
+        public async Task<IActionResult> BlogDetail(int? id)
+        {
+            Blog blog = await _blogService.GetByIdAsync((int)id);
+            Dictionary<string, string> headerBackgrounds = _context.HeaderBackgrounds.AsEnumerable().ToDictionary(m => m.Key, m => m.Value);
+
+            //List<Category> categories = await _categoryService.GetCategories();
+
+            //List<Product> releatedProducts = new();
+
+            //foreach (var category in categories)
+            //{
+            //    Product releatedProduct = await _context.ProductCategories.Where(m => m.Category.Id == category.Id).Select(m => m.Product).FirstAsync();
+            //    releatedProducts.Add(releatedProduct);
+
+
+            //}
+
+
+
+            BlogDetailVM model = new()
+            {
+                BlogDt = blog,
+                HeaderBackgrounds = headerBackgrounds,
+                //Advertisings = advertisings,
+                //RelatedProducts = releatedProducts
+            };
+
+            return View(model);
+        }
     }
 }
