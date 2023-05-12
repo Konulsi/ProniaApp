@@ -4,7 +4,7 @@
 }
 
 <div class="container my-5">
-    <div class="form-group d-flex">
+    <div class="form-group d-flex" style="gap: 5px;">
         <div>
             <p class="my-2">Main Image</p>
             <img src="~/assets/images/website-images//@Model.MainImage" style="width: 150px; height: 150px;" />
@@ -13,6 +13,7 @@
             <p class="my-2">Hover Image</p>
             <img src="~/assets/images/website-images//@Model.HoverImage" style="width: 150px; height: 150px;" />
         </div>
+
     </div>
 
     <div class="form-group">
@@ -41,10 +42,7 @@
         <input class="form-control" disabled id="customFile" asp-for="SKU" />
     </div>
     <div class="form-group">
-@*        <label class="my-2">Rate</label>
-        <input class="form-control" disabled id="customFile" asp-for="Rate" />*@
      <label class="my-2">Rate</label>
-     @*<input class="form-control" disabled id="customFile" asp-for="Rate" />*@
      <div class="rating-box">
 
         <ul>
@@ -81,6 +79,14 @@
         <label class="my-2">Color</label>
         <input class="form-control" disabled id="customFile" asp-for="@Model.ColorName" />
     </div>
+    <div>
+        <p class="my-2">All Image</p>
+        @foreach (var productImage in Model.ProductImages)
+        {
+            <img src="~/assets/images/website-images//@productImage.Image" style="width: 150px; height: 150px;" />
+        }
+
+    </div>
 
         <div class="form-group">
             <div class="buttons my-3">
@@ -92,8 +98,8 @@
 
 @section Scripts{
     <script src="~/ckeditor/ckeditor.js"></script>
-    <script>
+@*    <script>
         CKEDITOR.replace("description-text");
-    </script>
+    </script>*@
 }
 
