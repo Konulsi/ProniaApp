@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pronia.Data;
 
@@ -11,9 +12,10 @@ using Pronia.Data;
 namespace Pronia.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230513115906_AddColumnForAppUserTable")]
+    partial class AddColumnForAppUserTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -642,50 +644,6 @@ namespace Pronia.Migrations
                     b.ToTable("ProductCategories");
                 });
 
-            modelBuilder.Entity("Pronia.Models.ProductComment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FullName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Message")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("SoftDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Subject")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AppUserId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ProductComments");
-                });
-
             modelBuilder.Entity("Pronia.Models.ProductImage", b =>
                 {
                     b.Property<int>("Id")
@@ -1054,23 +1012,6 @@ namespace Pronia.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Pronia.Models.ProductComment", b =>
-                {
-                    b.HasOne("Pronia.Models.AppUser", "AppUser")
-                        .WithMany("ProductComments")
-                        .HasForeignKey("AppUserId");
-
-                    b.HasOne("Pronia.Models.Product", "Product")
-                        .WithMany("ProductComments")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppUser");
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("Pronia.Models.ProductImage", b =>
                 {
                     b.HasOne("Pronia.Models.Product", "Product")
@@ -1123,8 +1064,6 @@ namespace Pronia.Migrations
             modelBuilder.Entity("Pronia.Models.AppUser", b =>
                 {
                     b.Navigation("Comments");
-
-                    b.Navigation("ProductComments");
                 });
 
             modelBuilder.Entity("Pronia.Models.Author", b =>
@@ -1156,8 +1095,6 @@ namespace Pronia.Migrations
                     b.Navigation("Images");
 
                     b.Navigation("ProductCategories");
-
-                    b.Navigation("ProductComments");
 
                     b.Navigation("ProductSizes");
 

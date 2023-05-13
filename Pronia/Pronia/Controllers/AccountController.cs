@@ -44,7 +44,7 @@ namespace Pronia.Controllers
 
             AppUser newUser = new()
             {
-                UserName = model.Username,
+                UserName = string.Join("_", model.FirstName, model.LastName),
                 Email = model.Email,
                 LastName = model.LastName,
                 FirstName = model.FirstName,
@@ -61,7 +61,7 @@ namespace Pronia.Controllers
                 return View(model);
             }
 
-            await _userManager.AddToRoleAsync(newUser, Roles.Member.ToString());
+            //await _userManager.AddToRoleAsync(newUser, Roles.SuperAdmin.ToString());
 
             string token = await _userManager.GenerateEmailConfirmationTokenAsync(newUser);
 
@@ -77,7 +77,7 @@ namespace Pronia.Controllers
             }
 
             html = html.Replace("{{link}}", link);
-            html = html.Replace("{{headerText}}", "Hello P135");
+            html = html.Replace("{{headerText}}", "Welcome");
 
             _emailService.Send(newUser.Email, subject, html);
 
@@ -134,7 +134,7 @@ namespace Pronia.Controllers
                 return View(model);
             }
 
-            var result = await _signInManager.PasswordSignInAsync(user, model.Password, false, false);
+            var result = await _signInManager.PasswordSignInAsync(user, model.Password, model.IsRememberMe, false);
 
             if (!result.Succeeded)
             {

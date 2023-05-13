@@ -138,7 +138,7 @@
                             @foreach (var featured in Model.FeaturedProduct)
                             {
                                 <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-item">
+                                    <div class="product-item" data-id="product-cart">
                                         <div class="product-img">
                                             <a asp-controller="shop" asp-action="ProductDetail" asp-route-id="@featured.Id">
                                                 <img class="primary-img"
@@ -175,7 +175,7 @@
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a href="cart.html"
+                                                        <a href="cart.html" class="add-basket"
                                                        data-tippy="Add to cart"
                                                        data-tippy-inertia="true"
                                                        data-tippy-animation="shift-away"

@@ -1,0 +1,56 @@
+﻿@model RegisterVM
+@{
+    ViewData["Title"] = "Register";
+}
+
+
+
+<div class="col-lg-6 pt-5 pt-lg-0">
+    <div class="text-danger" style="position:relative;left:340px" asp-validation-summary="All"></div>
+    <form method="post" asp-action="Register">
+        <div class="login-form my-5" style="position:relative;left:400px">
+            <h4 class="login-title">Register</h4>
+            <div class="row">
+                <div class="col-md-6 col-12">
+                    <label>First Name</label>
+                    <input placeholder="First Name" asp-for="FirstName" />
+                    <span class="text-danger" asp-validation-for="FirstName"></span>
+                </div>
+
+                <div class="col-md-6 col-12">
+                    <label>Last Name</label>
+                    <input placeholder="Last Name" asp-for="LastName" />
+                    <span class="text-danger" asp-validation-for="LastName"></span>
+                </div>
+
+                <div class="col-md-12">
+                    <label>Email Address*</label>
+                    <input placeholder="Email Address" asp-for="Email" />
+                    <span class="text-danger" asp-validation-for="Email"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Password</label>
+                    <input placeholder="Password" asp-for="Password" />
+                    <span class="text-danger" asp-validation-for="Password"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Confirm Password</label>
+                    <input placeholder="Confirm Password" asp-for="ConfirmPassword" />
+                    <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
+                </div>
+
+                <div class="col-12">
+                    <button type="submit" class="btn btn-custom-size lg-size btn-pronia-primary">
+                        Register
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

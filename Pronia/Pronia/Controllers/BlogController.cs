@@ -36,10 +36,7 @@ namespace Pronia.Controllers
         public async Task<IActionResult> Index(int page = 1, int take = 2)
         {
             List<Blog> paginateBlog = await _blogService.GetPaginatedDatas(page, take);
-
             int pageCount = await GetPageCountAsync(take);
-
-
             Paginate<Blog> paginateDatas = new(paginateBlog, page, pageCount);
 
 

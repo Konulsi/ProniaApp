@@ -86,12 +86,32 @@
                                     </button>
                                     <ul class="dropdown-menu"
                                         aria-labelledby="settingButton">
-                                        <li>
-                                            <a class="dropdown-item" href="my-account.html">My account</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="login-register.html">Login | Register</a>
-                                        </li>
+                                        @if (User.Identity.IsAuthenticated)
+                                        {
+                                            <li class="nav-item">
+                                                <form asp-controller="Account" asp-action="Logout" method="post">
+                                                    <button style="border:none; color: black; background: transparent; margin-left: 45px; " type="submit" class="nav-link">
+                                                        Logout
+                                                    </button>
+                                                </form>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="my-account.html">@User.Identity.Name</a>
+                                            </li>
+                                        }
+                                        else
+                                        {
+                                            <li>
+                                                <a class="nav-link" style="color: black " asp-controller="Account" asp-action="Login">Login</a>
+                                            </li>
+
+                                            <li>
+                                                <a class="nav-link" style="color: black" asp-controller="Account" asp-action="Register">Register</a>
+                                            </li>
+                                        }
+
+
+
                                     </ul>
                                 </li>
                                 <li class="d-none d-lg-block">
@@ -852,7 +872,7 @@
                 <span class="ammount">$79.35</span>
             </div>
             <div class="group-btn_wrap d-grid gap-2">
-                <a href="cart.html" class="btn btn-dark">View Cart</a>
+                <a asp-controller="Basket" asp-action="index" class="btn btn-dark">View Cart</a>
                 <a href="checkout.html" class="btn btn-dark">Checkout</a>
             </div>
         </div>

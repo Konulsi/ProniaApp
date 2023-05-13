@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using NuGet.Packaging;
 using Pronia.Data;
 using Pronia.Helpers;
@@ -137,33 +139,66 @@ namespace Pronia.Controllers
 
         public async Task<IActionResult> ProductDetail(int? id)
         {
-            Product product = await _productService.GetFullDataById((int) id);
+            Product productDt = await _productService.GetFullDataById((int) id);
             Dictionary<string, string> headerBackgrounds = _context.HeaderBackgrounds.AsEnumerable().ToDictionary(m => m.Key, m => m.Value);
             List<Advertising> advertisings = await _advertisingService.GetAll();
 
             List<Category> categories = await _categoryService.GetCategories();
-
             List<Product> releatedProducts = new();
+            List<ProductComment> productComments = await _context.ProductComments.Include(m => m.AppUser).Where(m => m.ProductId == id).ToListAsync();
+
+            CommentVM commentVM= new CommentVM();   
 
             foreach (var category in categories)
             {
                 Product releatedProduct = await _context.ProductCategories.Where(m => m.Category.Id == category.Id).Select(m => m.Product).FirstAsync();
               releatedProducts.Add(releatedProduct);
-
-
             }
-
 
 
             ProductDetailVM model = new()
             {
-                ProductDt = product,
+                ProductDt = productDt,
                 HeaderBackgrounds = headerBackgrounds,
-                Advertisings= advertisings,
-                RelatedProducts= releatedProducts
+                Advertisings = advertisings,
+                RelatedProducts = releatedProducts,
+                CommentVM = commentVM,
+                ProductComments= productComments
+
             };
 
+
+
             return View(model);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public async Task<IActionResult> PostComment(ProductDetailVM productDetail, string userId, int productId)
+        {
+            if (productDetail.CommentVM.Message == null)
+            {
+                ModelState.AddModelError("Message", "Don't empty");
+                return RedirectToAction(nameof(ProductDetail), new { id = productId });
+            }
+
+            ProductComment productComment = new()
+            {
+                FullName = productDetail.CommentVM?.FullName,
+                Email = productDetail.CommentVM?.Email,
+                Subject = productDetail.CommentVM?.Subject,
+                Message = productDetail.CommentVM?.Message,
+                AppUserId = userId,
+                ProductId = productId
+            };
+
+            await _context.ProductComments.AddAsync(productComment);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(ProductDetail), new { id = productId });
+
         }
 
 
@@ -176,5 +211,68 @@ namespace Pronia.Controllers
             return PartialView("_ProductsPartial", products);
         }
 
+
+
+
+        //////////
+
+
+        [HttpPost]
+        public async Task<IActionResult> AddBasket(int? id)
+        {
+            if (id is null) return BadRequest();
+
+            var dbProduct = await GetProductById(id);
+
+            if (dbProduct == null) return NotFound();
+
+            List<BasketVM> basket = GetBasket();
+
+            UpdateBasket(basket, dbProduct.Id);
+
+            Response.Cookies.Append("basket", JsonConvert.SerializeObject(basket));
+
+            return Ok();
+        }
+
+        private void UpdateBasket(List<BasketVM> basket, int id)
+        {
+            BasketVM existProduct = basket.FirstOrDefault(m => m.Id == id);
+
+            if (existProduct == null)
+            {
+                basket.Add(new BasketVM
+                {
+                    Id = id,
+                    Count = 1
+                });
+            }
+            else
+            {
+                existProduct.Count++;
+            }
+        }
+
+        private async Task<Product> GetProductById(int? id)
+        {
+            return await _context.Products.FindAsync(id);
+        }
+
+
+        private List<BasketVM> GetBasket()
+        {
+            List<BasketVM> basket;
+
+            if (Request.Cookies["basket"] != null)
+            {
+                basket = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
+            }
+            else
+            {
+                basket = new List<BasketVM>();
+            }
+
+            return basket;
+        }
     }
 }
