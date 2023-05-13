@@ -12,7 +12,7 @@ namespace Pronia.Services.Interfaces
         Task<List<Product>> GetLatestProducts();
         Task<List<Product>> GetNewProducts();
         Task<int> GetCountAsync();
-        Task<List<Product>> GetPaginatedDatas(int page, int take,int? cateId);
+        Task<List<Product>> GetPaginatedDatas(int page, int take,int? cateId, int? tagId);
 
 
 

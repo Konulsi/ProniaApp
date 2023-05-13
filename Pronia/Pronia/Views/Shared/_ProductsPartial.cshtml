@@ -4,13 +4,13 @@
 {
     <div class="col-md-4 col-sm-6">
         <div class="product-item">
-@*            <div class="product-img">
+            <div class="product-img">
                 <a asp-controller="shop" asp-action="Productdetail" asp-route-id="@product.Id">
                     <img class="primary-img"
-                     src="~/assets/images/website-images/@product.MainImage"
+                     src="~/assets/images/website-images/@product.Images.FirstOrDefault(m => m.IsHover).Image"
                      alt="Product Images" />
                     <img class="secondary-img"
-                     src="~/assets/images/website-images/@product.HoverImage"
+                     src="~/assets/images/website-images/@product.Images.FirstOrDefault(m => m.IsHover).Image"
                      alt="Product Images" />
                 </a>
                 <div class="product-add-action">
@@ -52,7 +52,7 @@
                         </li>
                     </ul>
                 </div>
-            </div>*@
+            </div>
             <div class="product-content">
                 <a class="product-name"
                href="single-product-variable.html">@product.Name</a>

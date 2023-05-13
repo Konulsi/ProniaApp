@@ -36,9 +36,9 @@ namespace Pronia.Controllers
 
         }
 
-        public async Task<IActionResult>  Index(int page = 1, int take = 5, int? cateId = null)
+        public async Task<IActionResult>  Index(int page = 1, int take = 5, int? cateId = null, int? tagId = null)
         {
-            List<Product> paginateProduct = await _productService.GetPaginatedDatas(page, take, cateId);
+            List<Product> paginateProduct = await _productService.GetPaginatedDatas(page, take, cateId, tagId);
             int pageCount = await GetPageCountAsync(take);
 
             Paginate<Product> paginateDatas = new(paginateProduct, page, pageCount);
@@ -83,7 +83,7 @@ namespace Pronia.Controllers
 
         public async Task<IActionResult> GetProductsByCategory(int? id)
         {
-            List<Product> products = await _context.ProductCategories.Where(m => m.Category.Id == id).Select(m => m.Product).ToListAsync();
+            List<Product> products = await _context.ProductCategories.Include(m=>m.Product).ThenInclude(m => m.Images).Where(m => m.Category.Id == id).Select(m => m.Product).ToListAsync();
 
             return PartialView("_ProductsPartial", products);
         }
@@ -171,7 +171,7 @@ namespace Pronia.Controllers
 
         public async Task<IActionResult> GetProductsByTag(int? id)
         {
-            List<Product> products = await _context.ProductTags.Where(m => m.Tag.Id == id).Select(m => m.Product).ToListAsync();
+            List<Product> products = await _context.ProductTags.Include(m => m.Product).ThenInclude(m => m.Images).Where(m => m.Tag.Id == id).Select(m => m.Product).ToListAsync();
 
             return PartialView("_ProductsPartial", products);
         }

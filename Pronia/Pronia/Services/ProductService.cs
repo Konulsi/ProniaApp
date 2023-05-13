@@ -42,15 +42,14 @@ namespace Pronia.Services
         public async Task<List<Product>> GetFeaturedProducts() => await _context.Products.Where(m => !m.SoftDelete).OrderByDescending(m => m.Rate).ToListAsync();
         public async Task<List<Product>> GetBestsellerProducts() => await _context.Products.Where(m => !m.SoftDelete).OrderByDescending(m => m.SaleCount).ToListAsync();
         public async Task<List<Product>> GetLatestProducts() => await _context.Products.Where(m => !m.SoftDelete).OrderByDescending(m => m.CreateDate).ToListAsync();
-
         public async Task<List<Product>> GetNewProducts() => await _context.Products.Include(m => m.Images).Where(m => !m.SoftDelete).OrderByDescending(m => m.CreateDate).Take(4).ToListAsync();
 
 
 
-        public async Task<List<Product>> GetPaginatedDatas(int page, int take,int? cateId) 
+        public async Task<List<Product>> GetPaginatedDatas(int page, int take,int? cateId, int? tagId) 
         {
             List<Product> products = null;
-            if (cateId == null)
+            if (cateId == null || tagId == null)
             {
                 products =  await _context.Products
                     .Include(m => m.ProductSizes)
@@ -66,11 +65,23 @@ namespace Pronia.Services
             else
             {
                 products = await _context.ProductCategories
-                    .Where(m => m.Category.Id == cateId)
-                    .Select(m => m.Product)
-                    .Where(m => !m.SoftDelete)
-                    .Skip((page * take) - take).Take(take).ToListAsync();
+                                        .Include(m=> m.Product)
+                                        .ThenInclude(m=>m.Images)
+                                        .Where(m => m.Category.Id == cateId)
+                                        .Select(m => m.Product)
+                                        .Where(m => !m.SoftDelete)
+                                        .Skip((page * take) - take).Take(take).ToListAsync();
+            }
 
+            if(tagId != null)
+            {
+                products = await _context.ProductTags
+                                        .Include(m => m.Product)
+                                        .ThenInclude(m => m.Images)
+                                        .Where(m => m.Tag.Id == tagId)
+                                        .Select(m => m.Product)
+                                        .Where(m => !m.SoftDelete)
+                                        .Skip((page * take) - take).Take(take).ToListAsync();
             }
 
             return products;

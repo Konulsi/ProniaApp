@@ -36,7 +36,10 @@ namespace Pronia.Controllers
         public async Task<IActionResult> Index(int page = 1, int take = 2)
         {
             List<Blog> paginateBlog = await _blogService.GetPaginatedDatas(page, take);
+
             int pageCount = await GetPageCountAsync(take);
+
+
             Paginate<Blog> paginateDatas = new(paginateBlog, page, pageCount);
 
 
@@ -69,33 +72,12 @@ namespace Pronia.Controllers
         }
 
 
-
-
         private async Task<int> GetPageCountAsync(int take)
         {
             var blogCount = await _blogService.GetCountAsync();
 
             return (int)Math.Ceiling((decimal)blogCount / take);
         }
-
-
-
-
-        public async Task<IActionResult> GetProductsByCategory(int? id)
-        {
-            List<Product> products = await _context.ProductCategories.Where(m => m.Category.Id == id).Select(m => m.Product).ToListAsync();
-
-            return PartialView("_ProductsPartial", products);
-        }
-
-
-        public async Task<IActionResult> GetAllProduct()
-        {
-            List<Product> products = await _productService.GetAll();
-
-            return PartialView("_ProductsPartial", products);
-        }
-
 
 
         public async Task<IActionResult> Search(string searchText)
@@ -112,40 +94,18 @@ namespace Pronia.Controllers
         }
 
 
-        public async Task<IActionResult> GetProductsByTag(int? id)
-        {
-            List<Product> products = await _context.ProductTags.Where(m => m.Tag.Id == id).Select(m => m.Product).ToListAsync();
-
-            return PartialView("_ProductsPartial", products);
-        }
-
-
 
         public async Task<IActionResult> BlogDetail(int? id)
         {
             Blog blog = await _blogService.GetByIdAsync((int)id);
             Dictionary<string, string> headerBackgrounds = _context.HeaderBackgrounds.AsEnumerable().ToDictionary(m => m.Key, m => m.Value);
 
-            //List<Category> categories = await _categoryService.GetCategories();
-
-            //List<Product> releatedProducts = new();
-
-            //foreach (var category in categories)
-            //{
-            //    Product releatedProduct = await _context.ProductCategories.Where(m => m.Category.Id == category.Id).Select(m => m.Product).FirstAsync();
-            //    releatedProducts.Add(releatedProduct);
-
-
-            //}
-
-
 
             BlogDetailVM model = new()
             {
                 BlogDt = blog,
                 HeaderBackgrounds = headerBackgrounds,
-                //Advertisings = advertisings,
-                //RelatedProducts = releatedProducts
+       
             };
 
             return View(model);

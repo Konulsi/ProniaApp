@@ -17,7 +17,7 @@
                             #
                         </th>
                         <th>
-                            MainImage
+                            Image
                         </th>
                         <th>
                             Name
@@ -72,14 +72,14 @@
 
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center mt-3">
-                    <li class="page-item @(Model.HasPrevious? "":"disabled")">
-                        <a class="page-link" asp-action="Index" asp-route-page="@(Model.CurrentPage - 1)" tabindex="-1">Previous</a>
+                    <li class="page-item @(Model.HasPrevious? "active":"disabled")">
+                        <a class="page-link" asp-action="Index" asp-route-page="@(Model.CurrentPage - 1)" tabindex="-1" aria-label="Previous"></a>
                     </li>
                     @for (int i = 1; i <= Model.TotalPage; i++)
                     {
                         <li class="page-item @(Model.CurrentPage == i ? "disabled":"")"><a class="page-link" asp-action="Index" asp-route-page="@i">@i</a></li>
                     }
-                    <li class="page-item @(Model.HasNext? "":"disabled")">
+                    <li class="page-item @(Model.HasNext? "active":"disabled")">
                         <a class="page-link" asp-action="Index" asp-route-page="@(Model.CurrentPage + 1)">Next</a>
                     </li>
                 </ul>
