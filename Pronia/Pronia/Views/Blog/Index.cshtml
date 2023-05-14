@@ -152,11 +152,11 @@
                                             <a href="blog-detail.html">@blog.Title</a>
                                         </h2>
                                         <p class="short-desc mb-7">
-                                            @blog.Description
+                                            @blog.Description.Substring(0,250);
                                         </p>
                                     </div>
                                     <div class="blog-img img-hover-effect">
-                                        <a href="blog-detail.html">
+                                        <a asp-controller="Blog" asp-action="BlogDetail" asp-route-id="@blog.Id">
                                             @foreach (var blogImage in blog.Images)
                                             {
                                                 <img class="img-full"

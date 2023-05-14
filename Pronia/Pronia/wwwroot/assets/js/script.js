@@ -124,6 +124,25 @@
 
     })
 
+    //blog page search
+    $(document).on("keyup", ".input-field", function () {
+        debugger
+        $("#search-list li").slice(1).remove();
+        let value = $(".input-field").val();
+
+        $.ajax({
+
+            url: `blog/search?searchText=${value}`,
+
+            type: "Get",
+
+            success: function (res) {
+                $("#search-list").append(res);
+            }
+
+        })
+
+    })
 
 
     $(document).on("click", ".product-tag", function (e) {
@@ -176,8 +195,6 @@
         })
         return false;
     })
-
-
 
 
 

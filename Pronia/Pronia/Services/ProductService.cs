@@ -75,7 +75,7 @@ namespace Pronia.Services
 
             if(tagId != null)
             {
-                products = await _context.ProductTags
+                products = await _context.ProductTags  
                                         .Include(m => m.Product)
                                         .ThenInclude(m => m.Images)
                                         .Where(m => m.Tag.Id == tagId)

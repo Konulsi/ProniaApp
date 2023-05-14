@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Pronia.Areas.Admin.ViewModels;
 using Pronia.Data;
 using Pronia.Helpers;
 using Pronia.Models;
@@ -35,6 +37,7 @@ namespace Pronia.Controllers
 
         public async Task<IActionResult> Index(int page = 1, int take = 2)
         {
+            //paginated datas
             List<Blog> paginateBlog = await _blogService.GetPaginatedDatas(page, take);
             int pageCount = await GetPageCountAsync(take);
             Paginate<Blog> paginateDatas = new(paginateBlog, page, pageCount);
@@ -42,14 +45,10 @@ namespace Pronia.Controllers
 
             List<Category> categories = await _categoryService.GetCategories();
             List<Product> products = await _productService.GetAll();
-
             Dictionary<string, string> headerBackgrounds = _context.HeaderBackgrounds.AsEnumerable().ToDictionary(m => m.Key, m => m.Value);
-
             List<Blog> blogs = await _blogService.GetBlogs();
             List<Product> newProducts = await _productService.GetNewProducts();
             List<Tag> tags = await _tagService.GetAllAsync();
-
-
 
 
             BlogVM model = new BlogVM()
@@ -61,9 +60,7 @@ namespace Pronia.Controllers
                 Products= products,
                 NewProducts= newProducts,
                 Tags = tags
-                
             };
-
 
             return View(model);
         }
@@ -94,18 +91,66 @@ namespace Pronia.Controllers
 
         public async Task<IActionResult> BlogDetail(int? id)
         {
-            Blog blog = await _blogService.GetByIdAsync((int)id);
+            Blog blogDt = await _blogService.GetByIdAsync((int)id);
             Dictionary<string, string> headerBackgrounds = _context.HeaderBackgrounds.AsEnumerable().ToDictionary(m => m.Key, m => m.Value);
+            List<Category> categories = await _categoryService.GetCategories();
+            List<Blog> blogs = await _blogService.GetBlogs();
+            List<Tag> tags = await _tagService.GetAllAsync();
+            List<Product> newProduct = await _productService.GetNewProducts();
+
+
+            List<BlogComment> blogComments = await _context.BlogComments.Include(m => m.AppUser).Where(m => m.BlogId == id).ToListAsync();
+            //blog tablesinden hemin bloga aid olan commentleri listeleyirik. yeni idsi blogun idsine beraber olan
+            CommentVM commentVM = new CommentVM();
 
 
             BlogDetailVM model = new()
             {
-                BlogDt = blog,
+                BlogDt = blogDt,
                 HeaderBackgrounds = headerBackgrounds,
-       
+                BlogComments = blogComments,
+                CommentVM= commentVM,
+                Categories= categories,
+                Blogs = blogs,
+                Tags =tags,
+                NewProducts= newProduct
             };
 
             return View(model);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public async Task<IActionResult> PostComment(BlogDetailVM blogDetailVM, string userId, int blogId)
+        {
+            if (blogDetailVM.CommentVM.Message == null)
+            {
+                ModelState.AddModelError("Message", "Don't empty");
+                return RedirectToAction(nameof(blogDetailVM), new { id = blogId }); 
+            }
+
+            BlogComment blogComment = new()
+            {
+                FullName = blogDetailVM.CommentVM?.FullName,
+                Email = blogDetailVM.CommentVM?.Email,
+                Subject = blogDetailVM.CommentVM?.Subject,
+                Message = blogDetailVM.CommentVM?.Message,
+                AppUserId = userId,
+                BlogId = blogId
+            };
+
+            await _context.BlogComments.AddAsync(blogComment);
+            await _context.SaveChangesAsync();
+            //blogcomment tablesinde productId saxlamiram amma sqlde var ona gore comment yazmaq olmur
+            //blog indexden categorylere basdiqda duzgun olanlari getrmir tegler duz iwleyr amma
+            //main search iwlemir 
+            //blogdetailde search iwlemir
+            //Blog sehifesinde wekilleri duzelt
+
+            return RedirectToAction(nameof(BlogDetail), new { id = blogId });
+
         }
     }
 }

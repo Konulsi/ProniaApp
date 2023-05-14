@@ -117,8 +117,6 @@
                                     <option value="medium">@size.Size.Name</option>
                                 }
 
-                                @*                                <option value="large">Large Size With Poot</option>
-                                <option value="small">Small Size With Poot</option>*@
                             </select>
                         </div>
                         <p class="short-desc">
@@ -362,6 +360,7 @@
                                     <h2 class="heading">Leave a comment</h2>
                                     @if(User.Identity.IsAuthenticated)
                                     {
+                                        //hal-hazirda login olan user
                                         AppUser user = userManager.Users.FirstOrDefault( u => u.UserName == User.Identity.Name);
 
                                         <form class="feedback-form" asp-controller="Shop" asp-action="PostComment" asp-route-userId="@user.Id" asp-route-productId="@Model.ProductDt.Id" method="post">

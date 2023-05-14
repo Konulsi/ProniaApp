@@ -32,6 +32,8 @@ namespace Pronia.Data
         public DbSet<Social> Socials { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<ProductComment> ProductComments { get; set; }
+        public DbSet<BlogComment> BlogComments { get; set; }
+
 
 
 

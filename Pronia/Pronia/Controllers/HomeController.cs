@@ -55,12 +55,6 @@ namespace Pronia.Controllers
 
 
 
-
-
-
-
-
-
             HomeVM model = new()
             {
                 Sliders = sliders,

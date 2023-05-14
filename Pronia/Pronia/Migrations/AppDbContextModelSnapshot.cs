@@ -352,6 +352,50 @@ namespace Pronia.Migrations
                     b.ToTable("Blogs");
                 });
 
+            modelBuilder.Entity("Pronia.Models.BlogComment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("BlogId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("SoftDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Subject")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("BlogId");
+
+                    b.ToTable("BlogComments");
+                });
+
             modelBuilder.Entity("Pronia.Models.BlogImage", b =>
                 {
                     b.Property<int>("Id")
@@ -368,6 +412,12 @@ namespace Pronia.Migrations
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsHover")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("SoftDelete")
                         .HasColumnType("bit");
@@ -988,6 +1038,23 @@ namespace Pronia.Migrations
                     b.Navigation("Author");
                 });
 
+            modelBuilder.Entity("Pronia.Models.BlogComment", b =>
+                {
+                    b.HasOne("Pronia.Models.AppUser", "AppUser")
+                        .WithMany("BlogComments")
+                        .HasForeignKey("AppUserId");
+
+                    b.HasOne("Pronia.Models.Blog", "Blog")
+                        .WithMany("BlogComments")
+                        .HasForeignKey("BlogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("Blog");
+                });
+
             modelBuilder.Entity("Pronia.Models.BlogImage", b =>
                 {
                     b.HasOne("Pronia.Models.Blog", "Blog")
@@ -1122,6 +1189,8 @@ namespace Pronia.Migrations
 
             modelBuilder.Entity("Pronia.Models.AppUser", b =>
                 {
+                    b.Navigation("BlogComments");
+
                     b.Navigation("Comments");
 
                     b.Navigation("ProductComments");
@@ -1134,6 +1203,8 @@ namespace Pronia.Migrations
 
             modelBuilder.Entity("Pronia.Models.Blog", b =>
                 {
+                    b.Navigation("BlogComments");
+
                     b.Navigation("Comments");
 
                     b.Navigation("Images");
