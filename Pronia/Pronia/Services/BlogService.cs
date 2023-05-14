@@ -17,14 +17,14 @@ namespace Pronia.Services
                                                                    .Where(m => !m.SoftDelete)
                                                                    .Include(m => m.Images)
                                                                    .Include(m => m.Author)
-                                                                   .Include(m => m.Comments)
+                                                                   .Include(m => m.BlogComments)
                                                                    .ToListAsync();
 
         public async Task<Blog> GetByIdAsync(int? id) => await _context.Blogs
                                                                    .Where(m => !m.SoftDelete)
                                                                    .Include(m => m.Images)
                                                                    .Include(m => m.Author)
-                                                                   .Include(m => m.Comments)
+                                                                   .Include(m => m.BlogComments)
                                                                    .FirstOrDefaultAsync(m => m.Id == id);
 
         public async Task<int> GetCountAsync() => await _context.Blogs.CountAsync();
@@ -37,7 +37,7 @@ namespace Pronia.Services
                                 .Where(m => !m.SoftDelete)
                                 .Include(m => m.Images)
                                 .Include(m => m.Author)
-                                .Include(m => m.Comments)
+                                .Include(m => m.BlogComments)
                                 .Skip((page * take) - take)
                                 .Take(take).ToListAsync();
 

@@ -123,7 +123,7 @@ namespace Pronia.Controllers
                                 .Include(m => m.ProductCategories)?
                                  .Include(m => m.ProductSizes)
                                  .Include(m => m.ProductTags)
-                                 .Include(m => m.Comments)
+                                 .Include(m => m.ProductComments)
                                 .Where(m => !m.SoftDelete && m.Name.ToLower().Trim().Contains(searchText.ToLower().Trim()))
                                 .Take(6)
                                 .ToListAsync();
@@ -139,7 +139,7 @@ namespace Pronia.Controllers
                                             .Include(m => m.ProductCategories)
                                             .Include(m => m.ProductSizes)
                                             .Include(m => m.ProductTags)
-                                            .Include(m => m.Comments)
+                                            .Include(m => m.ProductComments)
                                             .Where(m => m.Name.ToLower().Contains(searchText.ToLower()))
                                             .Take(5)
                                             .ToListAsync();
@@ -187,7 +187,7 @@ namespace Pronia.Controllers
             if (productDetailVM.CommentVM.Message == null)
             {
                 ModelState.AddModelError("Message", "Don't empty");
-                return RedirectToAction(nameof(ProductDetail), new { id = productId }); //????????????
+                return RedirectToAction(nameof(ProductDetail), new { id = productId }); 
             }
 
             ProductComment productComment = new()

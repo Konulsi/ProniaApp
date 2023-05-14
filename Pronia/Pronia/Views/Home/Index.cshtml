@@ -678,7 +678,7 @@
                                             <a href="blog.html">@blog.Title</a>
                                         </h2>
                                         <p class="short-desc mb-7">
-                                            @blog.Description
+                                            @blog.Description.Substring(0,250)
                                         </p>
                                     </div>
                                     <div class="blog-img img-hover-effect">
@@ -708,3 +708,6 @@
     </div>
 </div>
 <!-- Blog Area End Here -->
+@section Scripts{
+    <script src="~/assets/js/script.js"></script>
+}

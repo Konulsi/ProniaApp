@@ -7,7 +7,6 @@
         public int AuthorId { get; set; }
         public Author Author { get; set; }
         public ICollection<BlogImage> Images{ get; set; }
-        public ICollection<Comment> Comments { get; set; }
         public ICollection<BlogComment> BlogComments { get; set; }
 
     }

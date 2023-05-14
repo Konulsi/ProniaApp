@@ -19,7 +19,7 @@ namespace Pronia.Services
                                                                     .Include(m => m.ProductTags)
                                                                     .ThenInclude(m => m.Tag)
                                                                     .Include(m => m.Color)
-                                                                    .Include(m => m.Comments)
+                                                                    .Include(m => m.ProductComments)
                                                                     .Include(m => m.ProductCategories)
                                                                     .ThenInclude(m => m.Category)
                                                                     .ToListAsync();
@@ -30,7 +30,7 @@ namespace Pronia.Services
                                                                             .Include(m => m.ProductTags)
                                                                             .ThenInclude(m => m.Tag)
                                                                             .Include(m => m.Color)
-                                                                            .Include(m => m.Comments)
+                                                                            .Include(m => m.ProductComments)
                                                                             .Include(m => m.ProductCategories)
                                                                             .ThenInclude(m => m.Category)
                                                                             .FirstOrDefaultAsync(m => m.Id == id);
@@ -55,7 +55,7 @@ namespace Pronia.Services
                     .Include(m => m.ProductSizes)
                     .Include(m => m.ProductTags)
                     .Include(m => m.Color)
-                    .Include(m => m.Comments)
+                    .Include(m => m.ProductComments)
                     .Include(m => m.ProductCategories)?
                     .Include(m => m.Images)
                     .Where(m => !m.SoftDelete)

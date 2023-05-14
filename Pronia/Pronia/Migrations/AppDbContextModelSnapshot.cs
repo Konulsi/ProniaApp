@@ -538,52 +538,6 @@ namespace Pronia.Migrations
                     b.ToTable("Colors");
                 });
 
-            modelBuilder.Entity("Pronia.Models.Comment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("AppUserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("AppUserId1")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("BlogId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("SoftDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Subject")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AppUserId1");
-
-                    b.HasIndex("BlogId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("Comments");
-                });
-
             modelBuilder.Entity("Pronia.Models.HeaderBackground", b =>
                 {
                     b.Property<int>("Id")
@@ -1066,31 +1020,6 @@ namespace Pronia.Migrations
                     b.Navigation("Blog");
                 });
 
-            modelBuilder.Entity("Pronia.Models.Comment", b =>
-                {
-                    b.HasOne("Pronia.Models.AppUser", "AppUser")
-                        .WithMany("Comments")
-                        .HasForeignKey("AppUserId1");
-
-                    b.HasOne("Pronia.Models.Blog", "Blog")
-                        .WithMany("Comments")
-                        .HasForeignKey("BlogId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Pronia.Models.Product", "Product")
-                        .WithMany("Comments")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppUser");
-
-                    b.Navigation("Blog");
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("Pronia.Models.Product", b =>
                 {
                     b.HasOne("Pronia.Models.Color", "Color")
@@ -1191,8 +1120,6 @@ namespace Pronia.Migrations
                 {
                     b.Navigation("BlogComments");
 
-                    b.Navigation("Comments");
-
                     b.Navigation("ProductComments");
                 });
 
@@ -1204,8 +1131,6 @@ namespace Pronia.Migrations
             modelBuilder.Entity("Pronia.Models.Blog", b =>
                 {
                     b.Navigation("BlogComments");
-
-                    b.Navigation("Comments");
 
                     b.Navigation("Images");
                 });
@@ -1222,8 +1147,6 @@ namespace Pronia.Migrations
 
             modelBuilder.Entity("Pronia.Models.Product", b =>
                 {
-                    b.Navigation("Comments");
-
                     b.Navigation("Images");
 
                     b.Navigation("ProductCategories");

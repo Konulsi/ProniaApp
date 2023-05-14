@@ -11,7 +11,7 @@
 <!-- Begin Main Content Area -->
 <main class="main-content">
     <div class="breadcrumb-area breadcrumb-height"
-         data-bg-image="~/assets/images/breadcrumb/bg/1-1-1919x388.jpg">
+         data-bg-image="assets/images/breadcrumb/bg/@Model.HeaderBackgrounds["PageNameBackgrounds"]>
         <div class="container h-100">
             <div class="row h-100">
                 <div class="col-lg-12">
@@ -86,12 +86,10 @@
                                                 <div class="widgets-list-item">
                                                     <div class="widgets-list-img">
                                                         <a href="#">
-                                                            @foreach (var blogImage in blog.Images)
-                                                            {
+                                                          
                                                                 <img class="img-full"
-                                                             src="~/assets/images/website-images/@blogImage.Image"
+                                                             src="~/assets/images/website-images/@Model.Blogs.FirstOrDefault().Images.FirstOrDefault(m => m.IsMain).Image"
                                                              alt="Blog Images" />
-                                                            }
 
                                                         </a>
                                                     </div>
@@ -158,7 +156,7 @@
                         </div>
                         <div class="blog-img img-hover-effect">
                             <img class="img-full"
-                                 src="~/assets/images/website-images/1-1-768x546.webp"
+                                 src="~/assets/images/website-images/@Model.BlogDt.Images.FirstOrDefault(m => m.IsMain).Image"
                                  alt="Blog Image" />
                         </div>
                         <p class="short-desc">
@@ -280,7 +278,7 @@
 
                             AppUser user = userManager.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
 
-                            <form class="feedback-form" asp-controller="Blog" asp-action="PostComment" asp-route-userId="@user.Id" asp-route-productId="@Model.BlogDt.Id" method="post">
+                            <form class="feedback-form" asp-controller="Blog" asp-action="PostComment" asp-route-userId="@user.Id" asp-route-blogId="@Model.BlogDt.Id" method="post">
                                 <div class="group-input">
                                     <div class="form-field me-md-30 mb-30 mb-md-0">
                                         <input value="@(user.FirstName + " " + user.LastName)"
@@ -307,7 +305,7 @@
                                     <button type="submit"
                                         value="submit"
                                         class="btn btn-custom-size xl-size btn-pronia-primary"
-                                        name="submit">
+                                       >
                                         Post Comment
                                     </button>
                                 </div>

@@ -17,7 +17,7 @@
                         <h2 class="breadcrumb-heading">Blog</h2>
                         <ul>
                             <li>
-                                <a href="index.html">Home</a>
+                                <a asp-controller="Home" asp-action="Index">Home</a>
                             </li>
                             <li>Blog Grid View</li>
                         </ul>
@@ -77,13 +77,11 @@
                                             <div class="swiper-slide">
                                                 <div class="widgets-list-item">
                                                     <div class="widgets-list-img">
-                                                        <a href="#">
-                                                            @foreach (var blogImage in blog.Images)
-                                                            {
+                                                        <a asp-controller="Blog" asp-action="BlogDetail" asp-route-id="@blog.Id">
+                                                         
                                                                 <img class="img-full"
-                                                             src="~/assets/images/website-images/@blogImage.Image"
+                                                             src="~/assets/images/website-images/@Model.Blogs.FirstOrDefault().Images.FirstOrDefault(m => m.IsMain).Image"
                                                              alt="Blog Images" />
-                                                            }
 
                                                         </a>
                                                     </div>
@@ -94,7 +92,7 @@
                                                             </ul>
                                                         </div>
                                                         <h2 class="title mb-0">
-                                                            <a href="#">@blog.Title</a>
+                                                            <a asp-controller="Blog" asp-action="BlogDetail" asp-route-id="@blog.Id">@blog.Title</a>
                                                         </h2>
                                                     </div>
                                                 </div>
@@ -143,13 +141,13 @@
                                         <div class="blog-meta">
                                             <ul>
                                                 <li class="author">
-                                                    <a href="#">By: @blog.Author.Name</a>
+                                                    <a  asp-controller="Blog" asp-action="BlogDetail" asp-route-id="@blog.Id">By: @blog.Author.Name</a>
                                                 </li>
                                                 <li class="date"> @blog.CreateDate.ToString("dd MMMMM yyyyy")</li>
                                             </ul>
                                         </div>
                                         <h2 class="title">
-                                            <a href="blog-detail.html">@blog.Title</a>
+                                            <a asp-controller="Blog" asp-action="BlogDetail" asp-route-id="@blog.Id">@blog.Title</a>
                                         </h2>
                                         <p class="short-desc mb-7">
                                             @blog.Description.Substring(0,250);
@@ -157,12 +155,10 @@
                                     </div>
                                     <div class="blog-img img-hover-effect">
                                         <a asp-controller="Blog" asp-action="BlogDetail" asp-route-id="@blog.Id">
-                                            @foreach (var blogImage in blog.Images)
-                                            {
+                               
                                                 <img class="img-full"
-                                             src="~/assets/images/website-images/@blogImage.Image"
+                                             src="~/assets/images/website-images/@blog.Images.FirstOrDefault(m => m.IsMain).Image"
                                              alt="Blog Image" />
-                                            }
 
                                         </a>
                                         <div class="inner-btn-wrap">
@@ -182,13 +178,13 @@
                                     <div class="blog-meta">
                                         <ul>
                                             <li class="author">
-                                                <a href="#">By: Admin</a>
+                                                <a asp-controller="Blog" asp-action="BlogDetail" asp-route-id="@Model.Blogs.FirstOrDefault().Id">By: Admin</a>
                                             </li>
                                             <li class="date">24 April 2021</li>
                                         </ul>
                                     </div>
                                     <h2 class="title">
-                                        <a href="blog-detail.html">Blog Audio Post</a>
+                                        <a asp-controller="Blog" asp-action="BlogDetail" asp-route-id="@Model.Blogs.FirstOrDefault().Id">Blog Audio Post</a>
                                     </h2>
                                     <p class="short-desc mb-7">
                                         Lorem ipsum dolor sit amet, consecteturl adipisl elit,
@@ -208,13 +204,13 @@
                                     <div class="blog-meta">
                                         <ul>
                                             <li class="author">
-                                                <a href="#">By: Admin</a>
+                                                <a asp-controller="Blog" asp-action="BlogDetail" asp-route-id="@Model.Blogs.FirstOrDefault().Id">By: Admin</a>
                                             </li>
                                             <li class="date">24 April 2021</li>
                                         </ul>
                                     </div>
                                     <h2 class="title">
-                                        <a href="blog-detail.html">Blog Video Post</a>
+                                        <a asp-controller="Blog" asp-action="BlogDetail" asp-route-id="@Model.Blogs.FirstOrDefault().Id">Blog Video Post</a>
                                     </h2>
                                     <p class="short-desc mb-7">
                                         Lorem ipsum dolor sit amet, consecteturl adipisl elit,
@@ -257,3 +253,6 @@
     </div>
 </main>
 <!-- Main Content Area End Here -->
+@section Scripts{
+    <script src="~/assets/js/script.js"></script>
+}

@@ -19,7 +19,6 @@ namespace Pronia.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<Color> Colors { get; set; }
-        public DbSet<Comment> Comments { get; set; }
         public DbSet<HeaderBackground> HeaderBackgrounds { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }

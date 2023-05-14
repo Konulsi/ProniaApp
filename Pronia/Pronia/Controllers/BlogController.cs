@@ -80,7 +80,7 @@ namespace Pronia.Controllers
                                             .Include(m => m.ProductCategories)
                                             .Include(m => m.ProductSizes)
                                             .Include(m => m.ProductTags)
-                                            .Include(m => m.Comments)
+                                            .Include(m => m.ProductComments)
                                             .Where(m => m.Name.ToLower().Contains(searchText.ToLower()))
                                             .Take(5)
                                             .ToListAsync();
@@ -100,7 +100,6 @@ namespace Pronia.Controllers
 
 
             List<BlogComment> blogComments = await _context.BlogComments.Include(m => m.AppUser).Where(m => m.BlogId == id).ToListAsync();
-            //blog tablesinden hemin bloga aid olan commentleri listeleyirik. yeni idsi blogun idsine beraber olan
             CommentVM commentVM = new CommentVM();
 
 
@@ -109,11 +108,11 @@ namespace Pronia.Controllers
                 BlogDt = blogDt,
                 HeaderBackgrounds = headerBackgrounds,
                 BlogComments = blogComments,
-                CommentVM= commentVM,
-                Categories= categories,
+                CommentVM = commentVM,
+                Categories = categories,
                 Blogs = blogs,
-                Tags =tags,
-                NewProducts= newProduct
+                Tags = tags,
+                NewProducts = newProduct
             };
 
             return View(model);
@@ -128,7 +127,7 @@ namespace Pronia.Controllers
             if (blogDetailVM.CommentVM.Message == null)
             {
                 ModelState.AddModelError("Message", "Don't empty");
-                return RedirectToAction(nameof(blogDetailVM), new { id = blogId }); 
+                return RedirectToAction(nameof(BlogDetail), new { id = blogId }); 
             }
 
             BlogComment blogComment = new()
@@ -147,7 +146,6 @@ namespace Pronia.Controllers
             //blog indexden categorylere basdiqda duzgun olanlari getrmir tegler duz iwleyr amma
             //main search iwlemir 
             //blogdetailde search iwlemir
-            //Blog sehifesinde wekilleri duzelt
 
             return RedirectToAction(nameof(BlogDetail), new { id = blogId });
 
