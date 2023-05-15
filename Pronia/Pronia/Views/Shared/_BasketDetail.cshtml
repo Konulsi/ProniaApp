@@ -1,0 +1,29 @@
+﻿@model List<BasketDetailVM>
+
+@if (Model != null)
+{
+   foreach (var item in Model)
+    {
+        <li class="minicart-product">
+            <a class="product-item_remove" href="#">
+                <i class="pe-7s-close" data-tippy="Remove" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder" tabindex="0"></i>
+            </a>
+            <a href="single-product-variable.html" class="product-item_img">
+                <img class="img-full" src="~/assets/images/webstie-images/@item.Image" alt="Product Image">
+            </a>
+            <div class="product-item_content">
+                <a class="product-item_title" href="single-product-variable.html">@item.Name</a>
+                <span class="product-item_quantity">@item.Count x $@item.Price</span>
+            </div>
+        </li>
+
+        <div class="minicart-item_total">
+            <span>Subtotal</span>
+            <span class="ammount">$@Model.FirstOrDefault().Total</span>
+        </div>
+    } 
+}
+
+
+
+

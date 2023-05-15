@@ -6,7 +6,12 @@
 }
 
 <div class="container my-5">
+  @*  @if (User.IsInRole("SuperAdmin"))
+    {
+
+    }*@
     <a class="btn btn-success text-white" asp-action="Create" style="float:right;">Create</a>
+
     <div class="table-responsive">
         @if (Model.Datas.Count() > 0)
         {

@@ -284,7 +284,7 @@
                                role="tab"
                                aria-controls="reviews"
                                aria-selected="false">
-                                Reviews(3)
+                                Reviews(@Model.ProductComments.Count())
                             </a>
                         </li>
                     </ul>
@@ -465,13 +465,13 @@
                             @foreach (var relatedProduct in Model.RelatedProducts.Take(4))
                             {
                                 <div class="swiper-slide product-item">
-                               @*     <div class="product-img">
+                                    <div class="product-img">
                                         <a asp-action="ProductDetail" asp-route-id="@relatedProduct.Id">
                                             <img class="primary-img"
-                                             src="~/assets/images/website-images/@relatedProduct.MainImage"
+                                             src="~/assets/images/website-images/@relatedProduct.Images.FirstOrDefault(m=>m.IsMain).Image"
                                              alt="product ımages" />
                                             <img class="secondary-img"
-                                             src="~/assets/images/website-images/@relatedProduct.HoverImage"
+                                             src="~/assets/images/website-images/@relatedProduct.Images.FirstOrDefault(m=>m.IsHover).Image"
                                              alt="product ımages" />
                                         </a>
                                         <div class="product-add-action">
@@ -513,7 +513,7 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                    </div>*@
+                                    </div>
                                     <div class="product-content">
                                         <a class="product-name"
                                       asp-action="ProductDetail" asp-route-id="@relatedProduct.Id">@relatedProduct.Name</a>

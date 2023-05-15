@@ -15,5 +15,9 @@ namespace Pronia.Services
             _context = context;
         }
         public async Task<List<Author>> GetAllAsync() => await _context.Authors.Include(m => m.Blogs).Where(m => !m.SoftDelete).ToListAsync();
+
+        public async Task<Author> GetByIdAsync(int? id) => await _context.Authors.Include(m => m.Blogs).Where(m => !m.SoftDelete).FirstOrDefaultAsync(m => m.Id == id);
+
+
     }
 }

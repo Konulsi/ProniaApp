@@ -142,13 +142,13 @@ namespace Pronia.Controllers
 
             await _context.BlogComments.AddAsync(blogComment);
             await _context.SaveChangesAsync();
-            //blogcomment tablesinde productId saxlamiram amma sqlde var ona gore comment yazmaq olmur
-            //blog indexden categorylere basdiqda duzgun olanlari getrmir tegler duz iwleyr amma
-            //main search iwlemir 
-            //blogdetailde search iwlemir
+
 
             return RedirectToAction(nameof(BlogDetail), new { id = blogId });
 
         }
+
+
+
     }
 }

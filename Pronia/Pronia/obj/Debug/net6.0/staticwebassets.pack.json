@@ -1149,6 +1149,18 @@
       "PackagePath": "staticwebassets\\assets\\images\\website-images\\3.png"
     },
     {
+      "Id": "C:\\Users\\konul\\OneDrive\\Masaüstü\\Backend-Project\\Pronia\\Pronia\\wwwroot\\assets\\images\\website-images\\5a8eb6d7-addd-4621-8873-4ca1d9fc3882_2e67c89b-15fd-40d7-b841-0deeb4548f0a_aboutUs-photo.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\website-images\\5a8eb6d7-addd-4621-8873-4ca1d9fc3882_2e67c89b-15fd-40d7-b841-0deeb4548f0a_aboutUs-photo.jpg"
+    },
+    {
+      "Id": "C:\\Users\\konul\\OneDrive\\Masaüstü\\Backend-Project\\Pronia\\Pronia\\wwwroot\\assets\\images\\website-images\\b5bdab85-4fd4-402c-857f-168ead2220c0_1b11d524-8d4c-46cc-a534-971e33fc3c8e_collegues-photo.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\website-images\\b5bdab85-4fd4-402c-857f-168ead2220c0_1b11d524-8d4c-46cc-a534-971e33fc3c8e_collegues-photo.jpg"
+    },
+    {
+      "Id": "C:\\Users\\konul\\OneDrive\\Masaüstü\\Backend-Project\\Pronia\\Pronia\\wwwroot\\assets\\images\\website-images\\c5fc0be2-86f3-49e4-8ac7-7f0d45a0bcf5_0c6106cb-1c4a-472c-bd7c-6739e6325cb4 germany - Copy.svg",
+      "PackagePath": "staticwebassets\\assets\\images\\website-images\\c5fc0be2-86f3-49e4-8ac7-7f0d45a0bcf5_0c6106cb-1c4a-472c-bd7c-6739e6325cb4 germany - Copy.svg"
+    },
+    {
       "Id": "C:\\Users\\konul\\OneDrive\\Masaüstü\\Backend-Project\\Pronia\\Pronia\\wwwroot\\assets\\images\\website-images\\car.png",
       "PackagePath": "staticwebassets\\assets\\images\\website-images\\car.png"
     },
@@ -1167,6 +1179,10 @@
     {
       "Id": "C:\\Users\\konul\\OneDrive\\Masaüstü\\Backend-Project\\Pronia\\Pronia\\wwwroot\\assets\\images\\website-images\\service.png",
       "PackagePath": "staticwebassets\\assets\\images\\website-images\\service.png"
+    },
+    {
+      "Id": "C:\\Users\\konul\\OneDrive\\Masaüstü\\Backend-Project\\Pronia\\Pronia\\wwwroot\\assets\\js\\index.js",
+      "PackagePath": "staticwebassets\\assets\\js\\index.js"
     },
     {
       "Id": "C:\\Users\\konul\\OneDrive\\Masaüstü\\Backend-Project\\Pronia\\Pronia\\wwwroot\\assets\\js\\main.js",

@@ -1,17 +1,23 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Identity;
+using Newtonsoft.Json;
 using Pronia.Models;
 using Pronia.Services.Interfaces;
 using Pronia.ViewModels;
+using Pronia.ViewModels.Basket;
+using System.Security.Claims;
+
 
 namespace Pronia.Services
 {
     public class BasketService : IBasketService
     {
-        private readonly IHttpContextAccessor _httpContextAccessor;  
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly UserManager<AppUser> _userManager;
 
-        public BasketService(IHttpContextAccessor httpContextAccessor)
+        public BasketService(IHttpContextAccessor httpContextAccessor, UserManager<AppUser> userManager)
         {
             _httpContextAccessor = httpContextAccessor;
+            _userManager = userManager;
         }
 
         public void AddProductToBasket(BasketVM existProduct, Product product, List<BasketVM> basket)
@@ -28,11 +34,13 @@ namespace Pronia.Services
             {
                 existProduct.Count++;
             }
-
-         
-
             _httpContextAccessor.HttpContext.Response.Cookies.Append("basket", JsonConvert.SerializeObject(basket));
         }
+
+
+
+
+
 
         public void DeleteProductFromBasket(int id)
         {

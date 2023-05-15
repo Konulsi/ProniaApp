@@ -1,4 +1,5 @@
 ﻿using Pronia.Models;
+using Pronia.ViewModels.Basket;
 
 namespace Pronia.ViewModels
 {
@@ -6,5 +7,7 @@ namespace Pronia.ViewModels
     {
         public int BasketCount { get; set; }
         public Dictionary<string, string> Settings { get; set; }
+
+        public List<BasketDetailVM> BasketDetailVMs { get; set; }
     }
 }

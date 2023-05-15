@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Pronia.Areas.Admin.ViewModels;
 using Pronia.Data;
@@ -159,6 +160,7 @@ namespace Pronia.Areas.Admin.Controllers
 
 
         [HttpGet]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create()
         {
 

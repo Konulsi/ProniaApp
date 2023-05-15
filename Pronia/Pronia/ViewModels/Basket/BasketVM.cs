@@ -1,4 +1,4 @@
-﻿namespace Pronia.ViewModels
+﻿namespace Pronia.ViewModels.Basket
 {
     public class BasketVM
     {

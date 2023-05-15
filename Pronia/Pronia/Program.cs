@@ -54,6 +54,10 @@ builder.Services.AddScoped<IBannerService, BannerService>();
 builder.Services.AddScoped<IAuthorService, AuthorService>();
 builder.Services.AddScoped<ISizeService, SizeService>();
 builder.Services.AddScoped<IAdvertisingService, AdvertisingService>();
+builder.Services.AddScoped<IBasketService, BasketService>();
+builder.Services.AddScoped<ISettingService, SettingService>();
+
+
 builder.Services.AddScoped<IEmailService, EmailService>();
 
 

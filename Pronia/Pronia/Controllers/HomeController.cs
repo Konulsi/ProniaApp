@@ -2,8 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using Pronia.Data;
 using Pronia.Models;
+using Pronia.Services;
 using Pronia.Services.Interfaces;
 using Pronia.ViewModels;
+using Pronia.ViewModels.Basket;
 
 namespace Pronia.Controllers
 {
@@ -16,6 +18,7 @@ namespace Pronia.Controllers
         private readonly IClientService _clientService;
         private readonly IBrandService _brandService;
         private readonly IBlogService _blogService;
+        private readonly IBasketService _basketService;
         
 
 
@@ -26,7 +29,8 @@ namespace Pronia.Controllers
                               IProductService productService,
                               IClientService clientService,
                               IBrandService brandService,
-                              IBlogService blogService)
+                              IBlogService blogService,
+                              IBasketService basketService)
         {
             _sliderService = sliderService;
             _advertisingService = advertisingService;
@@ -35,6 +39,7 @@ namespace Pronia.Controllers
             _clientService = clientService;
             _brandService= brandService;
             _blogService= blogService;
+            _basketService= basketService;
 
         }
 
@@ -73,6 +78,30 @@ namespace Pronia.Controllers
             };
 
             return View(model);
+        }
+
+
+
+        //basket
+        [HttpPost]
+        public async Task<IActionResult> AddBasket(int? id)
+        {
+            if (id == null) return BadRequest();
+
+            Product dbproduct = await _productService.GetById((int)id);     
+
+            if (dbproduct == null) return NotFound();
+
+            List<BasketVM> basket = _basketService.GetBasketDatas(); 
+            BasketVM existProduct = basket?.FirstOrDefault(m => m.Id == dbproduct.Id);
+
+            _basketService.AddProductToBasket(existProduct, dbproduct, basket);  
+
+
+            int basketCount = basket.Sum(m => m.Count);  
+
+
+            return Ok(basketCount);
         }
     }
 }

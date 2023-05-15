@@ -32,6 +32,10 @@ namespace Pronia.Data
         public DbSet<Tag> Tags { get; set; }
         public DbSet<ProductComment> ProductComments { get; set; }
         public DbSet<BlogComment> BlogComments { get; set; }
+        public DbSet<Basket> Baskets { get; set; }
+        public DbSet<ProductBasket> ProductBaskets { get; set; }
+
+
 
 
 

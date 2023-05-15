@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Pronia.Areas.Admin.ViewModels;
+using Pronia.Helpers.Enums;
 using Pronia.Models;
 
 namespace Pronia.Areas.Admin.Controllers
@@ -58,6 +59,17 @@ namespace Pronia.Areas.Admin.Controllers
             {
                 List<IdentityRole> roles = await _roleManager.Roles.ToListAsync();
                 return new SelectList(roles, "Id", "Name");
+            }
+
+            public async Task CreateRole()
+            {
+                foreach (var role in Enum.GetValues(typeof(Roles)))
+                {
+                    if (!await _roleManager.RoleExistsAsync(role.ToString()))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole { Name = role.ToString() });
+                    }
+                }
             }
     }
 }

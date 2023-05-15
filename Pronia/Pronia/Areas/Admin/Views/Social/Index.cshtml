@@ -1,0 +1,43 @@
+﻿@model List<Social>
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="container my-5">
+    <h4 class="card-title">Socials</h4>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Link
+                    </th>
+                    <th>
+                        Operations
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var social in Model)
+                {
+                    <tr>
+                        <td class="py-1">
+                            @social.Link
+                        </td>
+                        <td style="display: flex; gap: 10px;">
+                            <a class="btn btn-outline-info" asp-action="Detail" asp-route-id="@social.Id">Info</a>
+                            <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@social.Id">Edit</a>
+                            <form asp-action="Delete" asp-route-id="@social.Id" method="post">
+                                <button type="submit" class="btn btn-outline-danger">Delete</button>
+                            </form>
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -6,8 +6,10 @@ using NuGet.Packaging;
 using Pronia.Data;
 using Pronia.Helpers;
 using Pronia.Models;
+using Pronia.Services;
 using Pronia.Services.Interfaces;
 using Pronia.ViewModels;
+using Pronia.ViewModels.Basket;
 
 namespace Pronia.Controllers
 {
@@ -19,6 +21,8 @@ namespace Pronia.Controllers
         private readonly IColorService _colorService;
         private readonly ITagService _tagService;
         private readonly IAdvertisingService _advertisingService;
+        private readonly IBasketService _basketService;
+
 
 
 
@@ -27,7 +31,8 @@ namespace Pronia.Controllers
                               IColorService colorService,
                               ICategoryService categoryService,
                               ITagService tagService,
-                              IAdvertisingService advertisingService)
+                              IAdvertisingService advertisingService,
+                              IBasketService basketService)
         {
             _context = context;
             _productService = productService;
@@ -35,7 +40,7 @@ namespace Pronia.Controllers
             _categoryService = categoryService;
             _tagService = tagService;
             _advertisingService = advertisingService;
-
+            _basketService = basketService;
         }
 
         public async Task<IActionResult> Index(int page = 1, int take = 5, int? cateId = null, int? tagId = null)
@@ -161,7 +166,7 @@ namespace Pronia.Controllers
 
             foreach (var category in categories)
             {
-                Product releatedProduct = await _context.ProductCategories.Where(m => m.Category.Id == category.Id).Select(m => m.Product).FirstAsync();
+                Product releatedProduct = await _context.ProductCategories.Include(m => m.Product).ThenInclude(m => m.Images).Where(m => m.Category.Id == category.Id).Select(m => m.Product).FirstAsync();
                 releatedProducts.Add(releatedProduct);
             }
 
@@ -205,6 +210,30 @@ namespace Pronia.Controllers
 
             return RedirectToAction(nameof(ProductDetail), new { id = productId });
 
+        }
+
+
+
+
+        //basket
+        [HttpPost]
+        public async Task<IActionResult> AddBasket(int? id)
+        {
+            if (id == null) return BadRequest();
+
+            Product dbproduct = await _productService.GetById((int)id);
+            if (dbproduct == null) return NotFound();
+
+            List<BasketVM> basket = _basketService.GetBasketDatas();
+            BasketVM existProduct = basket?.FirstOrDefault(m => m.Id == dbproduct.Id);
+
+            _basketService.AddProductToBasket(existProduct, dbproduct, basket);
+
+
+            int basketCount = basket.Sum(m => m.Count);
+
+
+            return Ok(basketCount);
         }
 
 

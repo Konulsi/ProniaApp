@@ -182,6 +182,16 @@
                         </a>
                     </li>
 
+@*                    @if (User.IsInRole("SuperAdmin"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="Admin" asp-controller="Account" asp-action="AddRoleToUser">
+                                <i class="mdi mdi-grid-large menu-icon"></i>
+                                <span class="menu-title">Manage users</span>
+                            </a>
+                        </li>
+                    }*@
+
                     <li class="nav-item">
                         <a class="nav-link" asp-area="Admin" asp-controller="Slider" asp-action="Index" >
                             <i class="mdi mdi-view-headline menu-icon"></i>
@@ -259,7 +269,26 @@
                         </a>
                     </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="Admin" asp-controller="Author" asp-action="Index">
+                            <i class="mdi mdi-view-headline menu-icon"></i>
+                            <span class="menu-title">Authors</span>
+                        </a>
+                    </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="Admin" asp-controller="Setting" asp-action="Index">
+                            <i class="mdi mdi-view-headline menu-icon"></i>
+                            <span class="menu-title">Settings</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="Admin" asp-controller="Social" asp-action="Index">
+                            <i class="mdi mdi-view-headline menu-icon"></i>
+                            <span class="menu-title">Socials</span>
+                        </a>
+                    </li>
 
          
 @*                    <li class="nav-item">

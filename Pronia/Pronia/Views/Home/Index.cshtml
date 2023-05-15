@@ -1,7 +1,13 @@
-﻿@model HomeVM
+﻿@using System.Security.Claims;
+
+
+@model HomeVM
 @{
     ViewData["Title"] = "Home";
 }
+
+
+
 
 <!-- Begin Slider Area -->
 <div class="slider-area">
@@ -55,7 +61,6 @@
     </div>
 </div>
 <!-- Slider Area End Here -->
-
 <!-- Begin Shipping Area -->
 <div class="shipping-area section-space-top-100">
     <div class="container">
@@ -83,7 +88,6 @@
     </div>
 </div>
 <!-- Shipping Area End Here -->
-
 <!-- Begin Product Area -->
 <div class="product-area section-space-top-100">
     <div class="container">
@@ -175,14 +179,14 @@
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a href="cart.html" class="add-basket"
+                                                        <a href="cart.html" data-id="@featured.Id"
                                                        data-tippy="Add to cart"
                                                        data-tippy-inertia="true"
                                                        data-tippy-animation="shift-away"
                                                        data-tippy-delay="50"
                                                        data-tippy-arrow="true"
                                                        data-tippy-theme="sharpborder">
-                                                            <i class="pe-7s-cart"></i>
+                                                            <i class="pe-7s-cart add-basket"></i>
                                                         </a>
                                                     </li>
                                                 </ul>
@@ -263,14 +267,14 @@
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a href="cart.html"
+                                                        <a href="cart.html" data-id="@bestseller.Id"
                                                        data-tippy="Add to cart"
                                                        data-tippy-inertia="true"
                                                        data-tippy-animation="shift-away"
                                                        data-tippy-delay="50"
                                                        data-tippy-arrow="true"
                                                        data-tippy-theme="sharpborder">
-                                                            <i class="pe-7s-cart"></i>
+                                                            <i class="pe-7s-cart add-basket"></i>
                                                         </a>
                                                     </li>
                                                 </ul>
@@ -350,14 +354,14 @@
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a href="cart.html"
+                                                        <a href="cart.html" data-id="@latestProduct.Id"
                                                        data-tippy="Add to cart"
                                                        data-tippy-inertia="true"
                                                        data-tippy-animation="shift-away"
                                                        data-tippy-delay="50"
                                                        data-tippy-arrow="true"
                                                        data-tippy-theme="sharpborder">
-                                                            <i class="pe-7s-cart"></i>
+                                                            <i class="pe-7s-cart add-basket"></i>
                                                         </a>
                                                     </li>
                                                 </ul>
@@ -396,7 +400,6 @@
     </div>
 </div>
 <!-- Product Area End Here -->
-
 <!-- Begin Banner Area -->
 <div class="banner-area section-space-top-90">
     <div class="container">
@@ -473,7 +476,6 @@
     </div>
 </div>
 <!-- Banner Area End Here -->
-
 <!-- Begin Product Area -->
 <div class="product-area section-space-top-100">
     <div class="container">
@@ -571,7 +573,6 @@
     </div>
 </div>
 <!-- Product Area End Here -->
-
 <!-- Begin Testimonial Area -->
 <div class="testimonial-area section-space-top-90 section-space-bottom-95">
     <div class="container-fluid">
@@ -618,7 +619,6 @@
     </div>
 </div>
 <!-- Testimonial Area End Here -->
-
 <!-- Begin Brand Area -->
 <div class="brand-area section-space-bottom-100">
     <div class="container">

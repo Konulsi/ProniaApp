@@ -319,6 +319,33 @@ namespace Pronia.Migrations
                     b.ToTable("Banners");
                 });
 
+            modelBuilder.Entity("Pronia.Models.Basket", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("SoftDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("Baskets");
+                });
+
             modelBuilder.Entity("Pronia.Models.Blog", b =>
                 {
                     b.Property<int>("Id")
@@ -612,6 +639,38 @@ namespace Pronia.Migrations
                     b.HasIndex("ColorId");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("Pronia.Models.ProductBasket", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("BasketId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("SoftDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BasketId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductBaskets");
                 });
 
             modelBuilder.Entity("Pronia.Models.ProductCategory", b =>
@@ -981,6 +1040,15 @@ namespace Pronia.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Pronia.Models.Basket", b =>
+                {
+                    b.HasOne("Pronia.Models.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId");
+
+                    b.Navigation("AppUser");
+                });
+
             modelBuilder.Entity("Pronia.Models.Blog", b =>
                 {
                     b.HasOne("Pronia.Models.Author", "Author")
@@ -1029,6 +1097,25 @@ namespace Pronia.Migrations
                         .IsRequired();
 
                     b.Navigation("Color");
+                });
+
+            modelBuilder.Entity("Pronia.Models.ProductBasket", b =>
+                {
+                    b.HasOne("Pronia.Models.Basket", "Basket")
+                        .WithMany("ProductBaskets")
+                        .HasForeignKey("BasketId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Pronia.Models.Product", "Product")
+                        .WithMany("ProductBaskets")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Basket");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Pronia.Models.ProductCategory", b =>
@@ -1128,6 +1215,11 @@ namespace Pronia.Migrations
                     b.Navigation("Blogs");
                 });
 
+            modelBuilder.Entity("Pronia.Models.Basket", b =>
+                {
+                    b.Navigation("ProductBaskets");
+                });
+
             modelBuilder.Entity("Pronia.Models.Blog", b =>
                 {
                     b.Navigation("BlogComments");
@@ -1148,6 +1240,8 @@ namespace Pronia.Migrations
             modelBuilder.Entity("Pronia.Models.Product", b =>
                 {
                     b.Navigation("Images");
+
+                    b.Navigation("ProductBaskets");
 
                     b.Navigation("ProductCategories");
 

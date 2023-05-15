@@ -1,5 +1,6 @@
 ﻿using Pronia.Models;
 using Pronia.ViewModels;
+using Pronia.ViewModels.Basket;
 
 namespace Pronia.Services.Interfaces
 {

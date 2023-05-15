@@ -1,0 +1,33 @@
+﻿@model AuthorUpdateVM
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+<div class="container my-5">
+    <h1>Edit</h1>
+
+
+
+    <form class="form-sample" method="post" enctype="multipart/form-data">
+
+        <textarea class="form-control" id="name-text" asp-for="Name" rows="3"></textarea>
+        <span class="text-danger" asp-validation-for="Name">@ViewBag.error</span>
+
+        <div class="buttons my-3">
+            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+            <a class="btn btn-light" asp-action="Index">Cancel</a>
+        </div>
+
+    </form>
+
+</div>
+
+@section Scripts{
+        <script src="~/Admin/ckeditor/ckeditor.js"></script>
+            <script>
+                CKEDITOR.replace("name-text");
+            </script>
+}
+

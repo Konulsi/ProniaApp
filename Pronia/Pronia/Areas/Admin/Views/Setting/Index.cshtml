@@ -1,0 +1,41 @@
+﻿@model List<Settings>
+@{
+    ViewData["Title"] = "HeaderBackgrounds";
+}
+
+<div class="container my-5">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="text-center">
+                        Settings
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var setting in Model)
+                {
+                    <tr>
+
+                        <td>
+                            <div class="mt-2">
+                                <h6>@setting.Key</h6>
+                                @setting.Value
+                            </div>
+
+                        </td>
+                        <td style="display:flex;gap:17px;">
+                            <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@setting.Id">Edit</a>
+                            <form style="display:inline-block" asp-action="Delete" asp-route-id="@setting.Id" method="post">
+                                <button type="submit" class="btn btn-outline-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,4 +1,7 @@
-﻿      <!-- Begin Main Content Area -->
+﻿@model List<BasketDetailVM>
+
+
+<!-- Begin Main Content Area -->
       <main class="main-content">
         <div
           class="breadcrumb-area breadcrumb-height"
@@ -37,148 +40,58 @@
                           <th class="product-subtotal">Total</th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr>
-                          <td class="product_remove">
-                            <a href="#">
-                              <i
-                                class="pe-7s-close"
-                                data-tippy="Remove"
-                                data-tippy-inertia="true"
-                                data-tippy-animation="shift-away"
-                                data-tippy-delay="50"
-                                data-tippy-arrow="true"
-                                data-tippy-theme="sharpborder"
-                              ></i>
-                            </a>
-                          </td>
-                          <td class="product-thumbnail">
-                            <a href="#">
-                              <img
-                                src="assets/images/website-images/product/small-size/1-1-112x124.png"
-                                alt="Cart Thumbnail"
-                              />
-                            </a>
-                          </td>
-                          <td class="product-name">
-                            <a href="#">American Marigold</a>
-                          </td>
-                          <td class="product-price">
-                            <span class="amount">$23.45</span>
-                          </td>
-                          <td class="quantity">
-                            <div class="cart-plus-minus">
-                              <input
-                                class="cart-plus-minus-box"
-                                value="1"
-                                type="text"
-                              />
-                              <div class="dec qtybutton">
-                                <i class="fa fa-minus"></i>
-                              </div>
-                              <div class="inc qtybutton">
-                                <i class="fa fa-plus"></i>
-                              </div>
-                            </div>
-                          </td>
-                          <td class="product-subtotal">
-                            <span class="amount">$23.45</span>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="product_remove">
-                            <a href="#">
-                              <i
-                                class="pe-7s-close"
-                                data-tippy="Remove"
-                                data-tippy-inertia="true"
-                                data-tippy-animation="shift-away"
-                                data-tippy-delay="50"
-                                data-tippy-arrow="true"
-                                data-tippy-theme="sharpborder"
-                              ></i>
-                            </a>
-                          </td>
-                          <td class="product-thumbnail">
-                            <a href="#">
-                              <img
-                                src="assets/images/website-images/product/small-size/1-2-112x124.png"
-                                alt="Cart Thumbnail"
-                              />
-                            </a>
-                          </td>
-                          <td class="product-name">
-                            <a href="#">Black Eyed Susan</a>
-                          </td>
-                          <td class="product-price">
-                            <span class="amount">$25.45</span>
-                          </td>
-                          <td class="quantity">
-                            <div class="cart-plus-minus">
-                              <input
-                                class="cart-plus-minus-box"
-                                value="1"
-                                type="text"
-                              />
-                              <div class="dec qtybutton">
-                                <i class="fa fa-minus"></i>
-                              </div>
-                              <div class="inc qtybutton">
-                                <i class="fa fa-plus"></i>
-                              </div>
-                            </div>
-                          </td>
-                          <td class="product-subtotal">
-                            <span class="amount">$25.45</span>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="product_remove">
-                            <a href="#">
-                              <i
-                                class="pe-7s-close"
-                                data-tippy="Remove"
-                                data-tippy-inertia="true"
-                                data-tippy-animation="shift-away"
-                                data-tippy-delay="50"
-                                data-tippy-arrow="true"
-                                data-tippy-theme="sharpborder"
-                              ></i>
-                            </a>
-                          </td>
-                          <td class="product-thumbnail">
-                            <a href="#">
-                              <img
-                                src="assets/images/website-images/product/small-size/1-3-112x124.png"
-                                alt="Cart Thumbnail"
-                              />
-                            </a>
-                          </td>
-                          <td class="product-name">
-                            <a href="#">Bleeding Heart</a>
-                          </td>
-                          <td class="product-price">
-                            <span class="amount">$30.45</span>
-                          </td>
-                          <td class="quantity">
-                            <div class="cart-plus-minus">
-                              <input
-                                class="cart-plus-minus-box"
-                                value="1"
-                                type="text"
-                              />
-                              <div class="dec qtybutton">
-                                <i class="fa fa-minus"></i>
-                              </div>
-                              <div class="inc qtybutton">
-                                <i class="fa fa-plus"></i>
-                              </div>
-                            </div>
-                          </td>
-                          <td class="product-subtotal">
-                            <span class="amount">$30.45</span>
-                          </td>
-                        </tr>
+                                <tbody class="table-product">
+                          @if(Model != null)
+                          {
+                                        @foreach (var product in Model)
+                                        {
+                                            <tr data-id="@product.Id">
+                                                <td class="product_remove">
+                                                    <a href="#" >
+                                                        <i class="pe-7s-close delete-btn"
+                                                   data-tippy="Remove"
+                                                   data-tippy-inertia="true"
+                                                   data-tippy-animation="shift-away"
+                                                   data-tippy-delay="50"
+                                                   data-tippy-arrow="true"
+                                                   data-tippy-theme="sharpborder"></i>
+                                                    </a>
+                                                </td>
+                                                <td class="product-thumbnail">
+                                                    <a href="#">
+                                                        <img src="assets/images/website-images/@product.Image"
+                                                     alt="Cart Thumbnail" />
+                                                    </a>
+                                                </td>
+                                                <td class="product-name">
+                                                    <a href="#">@product.Name</a>
+                                                </td>
+                                                <td class="product-price">
+                                                    <span class="amount">$@product.Price</span>
+                                                </td>
+                                                <td class="quantity">
+                                                    <div class="cart-plus-minus">
+                                                        <input class="cart-plus-minus-box cart-count"
+                                                       value="1"
+                                                       type="text" />
+                                                        <div class="dec qtybutton">
+                                                            <i class="fa fa-minus minus-icon"></i>
+                                                        </div>
+                                                        <div class="inc qtybutton">
+                                                            <i class="fa fa-plus plus-icon"></i>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="product-subtotal">
+                                                    <span class="amount">$@product.Total</span>
+                                                </td>
+                                            </tr>
+                                        }
+
+                                    }
+                                  
+
+
                       </tbody>
                     </table>
                   </div>
@@ -217,8 +130,7 @@
                       <div class="cart-page-total">
                         <h2>Cart totals</h2>
                         <ul>
-                          <li>Subtotal <span>$79.35</span></li>
-                          <li>Total <span>$79.35</span></li>
+                          <li>Total <span>$@(Model.FirstOrDefault()?.Total )</span></li>
                         </ul>
                         <a href="#">Proceed to checkout</a>
                       </div>
@@ -231,3 +143,6 @@
         </div>
       </main>
       <!-- Main Content Area End Here -->
+@section Scripts{
+    <script src="~/assets/js/index.js"></script>
+}
